@@ -7,6 +7,9 @@ package view;
 
 import javax.swing.JOptionPane;
 
+import controller.sysdata;
+import model.Player;
+
 
 /**
  *
