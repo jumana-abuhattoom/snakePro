@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import javax.swing.JOptionPane;
 
+import controller.sysdata;
 
-/**
- *
- * @author Jumana abuHattoum
- */
 public class MainPage extends javax.swing.JFrame {
 
     /**
@@ -196,7 +188,7 @@ public class MainPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "There is no player accounts to update", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        updatePlayer up =new updatePlayer(); 
+        UpdatePlayer up =new UpdatePlayer(); 
         up.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
