@@ -1,17 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Jumana abuHattoum
- */
+import controller.sysdata;
+
+
 public class AddingQuestion extends javax.swing.JFrame {
 
     /**
@@ -340,3 +334,4 @@ public class AddingQuestion extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldans4;
     // End of variables declaration//GEN-END:variables
 }
+
