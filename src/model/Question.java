@@ -7,13 +7,13 @@ import utils.E_Level;
 public class Question {
 	    public String questionNumber;
 	    public String team;
-	    public String[] answers=new String[4];
+	    public ArrayList<String> answers;
 	    public int IndexOfCorrectAnswer; 
 	    public E_Level level;
 	     
 	    
 	    
-	public Question(String questionNumber, String team, String[] answers, int indexOfCorrectAnswer, E_Level level) {
+	public Question(String questionNumber, String team, ArrayList<String> answers, int indexOfCorrectAnswer, E_Level level) {
 			super();
 			this.questionNumber = questionNumber;
 			this.team = team;
