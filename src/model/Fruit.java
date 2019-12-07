@@ -5,7 +5,6 @@ public  abstract class Fruit {
 	public int addedPoints;
 	public int addedLenght;
 	
-	
 	public Fruit(int appearAfterSec, int addedPoints, int addedLenght) {
 		super();
 		this.appearAfterSec = appearAfterSec;
