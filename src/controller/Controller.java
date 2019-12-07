@@ -10,7 +10,6 @@ import utils.Direction;
 
 /**
  * Main controller as part of MVC design pattern.
- *
  * @author Justin Beringer
  */
 public class Controller {
@@ -21,7 +20,6 @@ public class Controller {
     private static boolean isNewGame = true;
     private static boolean isPaused = false;
     private boolean isChoosingDifficulty;
-
     private static final Model model = new Model();
     private static ActionListener taskPerformer;
     private static Direction direction;
@@ -140,6 +138,9 @@ public class Controller {
         timer.stop();
         this.isChoosingDifficulty = isChoosingDifficulty;
     }
+    
+    
+    
 
     public void setDifficulty(int difficulty) {
         switch (difficulty) {

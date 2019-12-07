@@ -39,24 +39,19 @@ public final class Model {
     private final int HEIGHT = 600;
     private final int SCALE = 15;
     private final int GROWTH_SPURT = 8;
-
     private final int MAX_INDEX_X = WIDTH / SCALE;
     private final int MAX_INDEX_Y = HEIGHT / SCALE;
-
     private int squaresToGrow;
     private int applesEaten = 0;
     private Direction direction = Direction.UP;
     private int difficulty;
-
     private final View view;
     private final Point apple = new Point();
     private final Random random = new Random();
     private final Deque<Point> snakeBody = new ArrayDeque<>();
     private final Set<Point> occupiedPositions = new LinkedHashSet();
     private Clip gameOverSound, eatAppleSound, gameMusicSound;
-
     private final String[] difficulties = {"n00b", "quick", "crazy"};
-
     private final String HIGH_SCORE_N00B = "High Score " + difficulties[0] + ": ";
     private final String HIGH_SCORE_SPEED = "High Score " + difficulties[1] + ": ";
     private final String HIGH_SCORE_CRAZY = "High Score " + difficulties[2] + ": ";
