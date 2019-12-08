@@ -188,7 +188,7 @@ public class MainPage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "There is no player accounts to update", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        UpdatePlayer up =new UpdatePlayer(); 
+        updatePlayer up =new updatePlayer(); 
         up.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
