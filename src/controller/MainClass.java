@@ -12,13 +12,14 @@ public class MainClass extends Application  {
     
 	    @Override
 	    public void start(Stage primaryStage) {
-	    	sysdata.getInstance().getQuestionFromJson();
+	    	importFromJson jsc= new importFromJson();
+	    	jsc.getQuestionFromJson();
 	    	ArrayList<String> s = new ArrayList<>();
 	    	s.add("ssd");
 	    	s.add("ssd1");
 	    	s.add("ssd2");
 	    	s.add("ssd3");
-	        sysdata.getInstance().Addquestiontojson(
+	        jsc.Addquestiontojson(
 	        		new Question("1", s, 1, E_Level.EASY));
 	        
 	        MainPage mp = new MainPage(false); 
