@@ -19,7 +19,7 @@ public class MainClass extends Application  {
 	    	s.add("ssd2");
 	    	s.add("ssd3");
 	        sysdata.getInstance().Addquestiontojson(
-	        		new Question("1", "شس", s, 1, E_Level.EASY));
+	        		new Question("1", s, 1, E_Level.EASY));
 	        
 	        MainPage mp = new MainPage(false); 
 	   

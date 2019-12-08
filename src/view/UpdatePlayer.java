@@ -170,13 +170,12 @@ public class UpdatePlayer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        sysdata.getInstance().DeletePlayer(thep.name, thep.password); 
-        if(sysdata.getInstance().AddPlayer(jTextField1.getText(), jPasswordField1.getText())){
+        if(sysdata.getInstance().UpdatePlayerDetails(thep.name, thep.password, jTextField1.getText(), jPasswordField1.getText())){
             JOptionPane.showMessageDialog(rootPane, "updated Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-            
+
         }else { 
-            sysdata.getInstance().AddPlayer(thep.name, thep.password);
-            JOptionPane.showMessageDialog(rootPane, "Player Already exists ", "Error", JOptionPane.ERROR_MESSAGE);
+
+            JOptionPane.showMessageDialog(rootPane, "Player Already exists or username is not legal ", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         this.setVisible(false);

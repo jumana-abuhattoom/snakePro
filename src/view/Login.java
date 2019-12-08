@@ -118,13 +118,14 @@ public class Login extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
-		for (Player p : sysdata.getInstance().players) {
-			if (p.name.equals(jTextField1.getText()) && p.password.equals(jPasswordField1.getText())) {
-				this.setVisible(false);
-				Controller.main(null);
-				return;
-			}
+		if(sysdata.getInstance().CheckUsernameAndPassword(jTextField1.getText(),jPasswordField1.getText() )) { 
+			this.setVisible(false);
+			Controller.main(null);
+			return;
+		
 		}
+		
+	
 		JOptionPane.showMessageDialog(rootPane, "wrong username or password", "Error", JOptionPane.ERROR_MESSAGE);
 		jTextField1.setText("");
 		jPasswordField1.setText("");

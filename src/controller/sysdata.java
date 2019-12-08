@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -43,6 +45,7 @@ public class sysdata {
                 return false; 
             }
         }
+        if(name.equals("Admin") || name.equals("admin")) return false; 
         
         players.add(new Player(name, password)); 
         return true; 
@@ -63,8 +66,16 @@ public class sysdata {
 //    Adding New Question
     public boolean AddQuestion(String questionNumber,ArrayList<String> answers,int IndexOfCorrectAnswer,int level){ 
         if(questionNumber==null || answers==null || IndexOfCorrectAnswer<1 || IndexOfCorrectAnswer>4 || level <1 || level>3) return false;
-//        Question q = new Question(questionNumber, answers, IndexOfCorrectAnswer, level); 
-//        questions.add(q);
+        
+        Question q = new Question(questionNumber, answers, IndexOfCorrectAnswer, E_Level.getLevelbyNumber(level)); 
+        for (String ans : answers) {
+        	System.out.println(ans + "---" );
+			if(ans.equals("")) return false; 
+		}
+        
+     //   if(questionNumber ==)
+        
+        questions.add(q);
         return true;
     }
     public HashSet<Question> getQuestionFromJson(){
@@ -96,8 +107,7 @@ public class sysdata {
           for (int j = 0; j < answers.length(); ++j) {
            s.add(answers.get(j).toString());
           }
-          Question q1 = new Question(question,
-        		  team, s,IndexOfCorrectAnswer,  E_Level.EASY);
+          Question q1 = new Question(question,s,IndexOfCorrectAnswer,  E_Level.getLevelbyNumber(level));
           this.questions.add(q1);
           System.out.println(this.questions);
 
@@ -126,8 +136,8 @@ for(Question s : this.questions ){
 	jsonArray.put(s.answers.get(3));
 	jsonObject.put("answers", jsonArray);
 	jsonObject.put("correct_ans", s.IndexOfCorrectAnswer);
-	jsonObject.put("level",s.level.getLevel() );
-	jsonObject.put("team",s.team );
+	jsonObject.put("level",s.level );
+	jsonObject.put("team","Rabbit" );
 	
 	//JSON array and values
 	
@@ -149,6 +159,45 @@ jsonObject1.put("questions", jsonArray1);
 		System.out.println(jsonObject1);
 		return true;
 	}
+    
+    //--------------------------------------------------Helping methods for tests------------------------------------------------
+    
+    public boolean CheckUsernameAndPassword(String User, String Pass) { 
+    	for (Player p : sysdata.getInstance().players) {
+			if (p.name.equals(User) && p.password.equals(Pass)) {
+				return true;
+			}
+		}
+    	if(User=="Admin" && Pass=="admin11") return true;
+    	return false;
+    }
+    
+    
+    public boolean UpdatePlayerDetails(String prevUser, String PrevPass, String CurrentUser, String CurrentPass) { 
+    	  sysdata.getInstance().DeletePlayer(prevUser,PrevPass); 
+          if(sysdata.getInstance().AddPlayer(CurrentUser, CurrentPass )){
+             return true; 
+          }else { 
+              sysdata.getInstance().AddPlayer(prevUser,PrevPass);
+              return false;
+          }
+    }
+	public boolean DeleteQuestion(String num) {
+		if(num == null ) return false; 
+		
+		for (Question q : questions) {
+			if(q.questionNumber.equals(num)) { 
+				questions.remove(q);
+				return true;
+			}
+		}
+		return false; 
+		
+	}
+    
+    
+    
+    
     
     
 }

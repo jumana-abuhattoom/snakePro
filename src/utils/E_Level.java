@@ -14,5 +14,10 @@ public enum E_Level {
 		return level;
 	}
 	
+	public static E_Level getLevelbyNumber(int lev) { 
+		if(lev ==1) return EASY; 
+		if(lev ==2) return MEDIUM; 
+		return HARD; 
+	}
 	
 }

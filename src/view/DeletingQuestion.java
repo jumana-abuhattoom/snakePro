@@ -2,6 +2,11 @@ package view;
 
 import controller.sysdata;
 import model.Question;
+import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionEvent;
 
 public class DeletingQuestion extends javax.swing.JFrame {
 
@@ -11,7 +16,7 @@ public class DeletingQuestion extends javax.swing.JFrame {
     public DeletingQuestion() {
         initComponents();
         for(Question q : sysdata.getInstance().questions){
-        jComboBox1.addItem(q.questionNumber);
+        	jComboBox1.addItem(q.questionNumber);
         }
     }
 
@@ -27,6 +32,27 @@ public class DeletingQuestion extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jButton1.addActionListener(new ActionListener() {
+        	
+        	
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		String num = jComboBox1.getSelectedItem().toString();
+        		for(Question q : sysdata.getInstance().questions) { 
+        			if(q.questionNumber.equals(num)) { 
+        				sysdata.getInstance().DeleteQuestion(num); 
+        				JOptionPane.showMessageDialog(rootPane, "Your Question have been deleted Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+        				jComboBox1.removeAllItems(); 
+        				for(Question w : sysdata.getInstance().questions){
+        			        	jComboBox1.addItem(w.questionNumber);
+        			        }
+        				return; 
+        			}
+        		}
+       
+                JOptionPane.showMessageDialog(rootPane, "Question not found", "Error", JOptionPane.ERROR_MESSAGE);
+        	}
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Delete Question ");
