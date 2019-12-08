@@ -25,6 +25,14 @@ public class Question {
     	this.answers = new ArrayList<>();
     	this.answers.addAll(answers);            
     }
+
+	@Override
+	public String toString() {
+		return "Question [questionNumber=" + questionNumber + ", answers=" + answers + ", IndexOfCorrectAnswer="
+				+ IndexOfCorrectAnswer + ", level=" + level + "]";
+	}
+    
+    
     
     
 	    

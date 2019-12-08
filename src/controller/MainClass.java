@@ -11,16 +11,13 @@ import view.MainPage;
 public class MainClass extends Application  {
     
 	    @Override
-	    public void start(Stage primaryStage) {
+	    public void start(Stage primaryStage) throws Exception {
 	    	importFromJson jsc= new importFromJson();
+	    //	jsc.ImportQuestions();
+	    	
 	    	jsc.getQuestionFromJson();
-	    	ArrayList<String> s = new ArrayList<>();
-	    	s.add("ssd");
-	    	s.add("ssd1");
-	    	s.add("ssd2");
-	    	s.add("ssd3");
-	        jsc.Addquestiontojson(
-	        		new Question("1", s, 1, E_Level.EASY));
+	    	
+	    	
 	        
 	        MainPage mp = new MainPage(false); 
 	   
