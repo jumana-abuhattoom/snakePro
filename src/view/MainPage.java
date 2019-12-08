@@ -188,7 +188,7 @@ public class MainPage extends javax.swing.JFrame {
             return;
         }
         
-        updatePlayer up =new updatePlayer(); 
+        UpdatePlayer up =new UpdatePlayer(); 
         up.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
