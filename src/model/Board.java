@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import controller.Controller;
-import view.MainView;
-import view.ScoreView;
 import javafx.animation.*;
 import javafx.util.Duration;
+import utils.Constants;
+import view.MainView;
+import view.ScoreView;
 
 public class Board {
 
@@ -22,7 +23,11 @@ public class Board {
 	/**
 	 * List of fruits
 	 */
-	private ArrayList<Apple> fruits;
+	private ArrayList<Apple> apples;
+	private ArrayList<Banana> bananas;
+	private ArrayList<Pear> pears;
+
+	
 	/**
 	 * Super fruit object
 	 */
@@ -77,6 +82,12 @@ public class Board {
 	 * Timers for super fruit and it's effect
 	 */
 	private Timeline timeSuper, timeSFruit;
+	
+	
+	
+	
+	
+	
 
 	/**
 	 * Default constructor of board class to initialize starting variables
@@ -84,7 +95,11 @@ public class Board {
 	public Board() {
 
 		scoreView = new ScoreView();
-		fruits = new ArrayList<>();
+		apples = new ArrayList<>();
+		//++++
+		bananas=new ArrayList<>();
+		pears=new ArrayList<>();
+		
 		obstacles = new ArrayList<>();
 		score = fruitsEaten = 0;
 		snake = new Snake();
@@ -238,14 +253,14 @@ public class Board {
 			if (helpS) { // to not collide with fruits
 
 				// if there are no fruits on the field
-				if (fruits.size() == 0) {
+				if (apples.size() == 0) {
 					helpF = true;
 				} else {
 
-					for (int i = 0; i < fruits.size(); ++i) {
+					for (int i = 0; i < apples.size(); ++i) {
 
-						helpX = fruits.get(i).getX();
-						helpY = fruits.get(i).getY();
+						helpX = apples.get(i).getX();
+						helpY = apples.get(i).getY();
 
 						// back to while to generate new point, and check everything again
 						if (helpX == obstacleX && helpY == obstacleY) {
@@ -253,11 +268,13 @@ public class Board {
 						}
 
 						// doesn't collide with fruits
-						if (i == fruits.size() - 1) {
+						if (i == apples.size() - 1) {
 							helpF = true;
 						}
 					}
 				}
+				
+				
 				// if there's a super fruit on board, check to not collide with it
 				if (isSuper) {
 					if (obstacleX == sFruit.getX() && obstacleY == sFruit.getY()) {
@@ -316,37 +333,86 @@ public class Board {
 				return;
 			}
 		}
-		// check for a fruit on board
-		for (int i = 0; i < fruits.size(); ++i) {
+		// check for a fruit on board //// APPLE  - same for banana 
+		for (int i = 0; i < apples.size(); ++i) {
 
-			foodX = fruits.get(i).getX();
-			foodY = fruits.get(i).getY();
+			foodX = apples.get(i).getX();
+			foodY = apples.get(i).getY();
 
 			if (foodX == headX && foodY == headY) {
 
-				removeFruit(i);
+				removeApple(i);
 				addLength(); // adds body part to snake
 				++fruitsEaten;
-				
+
 				if (superState)
 					score += 2;
 				else
-					++score;
+					score+=Constants.pointsAddedApple;
 
-new java.util.Timer().schedule( 
-        new java.util.TimerTask() {
-            @Override
-            public void run() {
-                // your code here
-            	updateFruit();
-            }
-        }, 
-        5000
-);
+				new java.util.Timer().schedule(new java.util.TimerTask() {
+					@Override
+					public void run() {
+						// your code here
+						updateFruit();
+					}
+				}, Constants.appleAppearAfterSEC * 1000);
 				addObstacle = false;
 			}
 		}
+		
+		// check for bananaa on board 
+		for (int i = 0; i < bananas.size(); ++i) {
+
+			foodX = bananas.get(i).getX();
+			foodY = bananas.get(i).getY();
+
+			if (foodX == headX && foodY == headY) {
+
+				removeBanana(i);
+				addLength(); // adds body part to snake
+					score+=Constants.pointsAddedBnana;
+
+				new java.util.Timer().schedule(new java.util.TimerTask() {
+					@Override
+					public void run() {
+						// your code here
+						updateFruit();
+					}
+				}, Constants.bnanaAppearAfterSEC * 1000);
+				addObstacle = false;
+			}
+		}
+		
+		// check for pear on boarddd ++++
+		
+		for (int i = 0; i < pears.size(); ++i) {
+
+			foodX = pears.get(i).getX();
+			foodY = pears.get(i).getY();
+
+			if (foodX == headX && foodY == headY) {
+
+				removePear(i);
+				addLength(); // adds body part to snake
+					score+=Constants.pointsAddedPear;
+
+				new java.util.Timer().schedule(new java.util.TimerTask() {
+					@Override
+					public void run() {
+						// your code here
+						updateFruit();
+					}
+				}, Constants.pearAppearAfterSEC * 1000);
+				addObstacle = false;
+			}
+		}
+		
+		
+		
 	}
+
+	
 
 	/**
 	 * Method for updating fruits on board
@@ -357,14 +423,14 @@ new java.util.Timer().schedule(
 															// super
 		int[] place; // place on board, will hold X and Y
 
-		if (fruits.size() <= 0) { // if there's no fruit
+		if (apples.size() <= 0) { // if there's no fruit
 
-			if (fruitsEaten % 3 == 0 && fruitsEaten != 0 && !isSuper) { // adds super fruit
-				isSuper = true;
-				place = placeFruit();
-				sFoodX = place[0];
-				sFoodY = place[1];
-			}
+//			if (fruitsEaten % 3 == 0 && fruitsEaten != 0 && !isSuper) { // adds super fruit
+//				isSuper = true;
+//				place = placeFruit();
+//				sFoodX = place[0];
+//				sFoodY = place[1];
+//			}
 			do {
 				place = placeFruit();
 				foodX = place[0];
@@ -374,6 +440,32 @@ new java.util.Timer().schedule(
 			
 			addFruit(foodX, foodY, sFoodX, sFoodY);
 		}
+		
+		//+++++++++ ana zedet
+		if (bananas.size() <= 0) { // if there's no fruit
+
+			do {
+				place = placeFruit();
+				foodX = place[0];
+				foodY = place[1];
+			} while (foodX == sFoodX && foodY == sFoodY);
+
+			bananas.add(new Banana(foodX,foodY));
+		}
+		
+		//++++++++++++++++++++++++++++++++
+		if (pears.size() <= 0) { // if there's no fruit
+
+			do {
+				place = placeFruit();
+				foodX = place[0];
+				foodY = place[1];
+			} while (foodX == sFoodX && foodY == sFoodY);
+
+			pears.add(new Pear(foodX,foodY));
+		}
+		
+		
 	}
 
 	/**
@@ -460,7 +552,7 @@ new java.util.Timer().schedule(
 					new KeyFrame(Duration.millis(SuperFruit.ON_BOARD_TIME), lambda -> removeSuperFruit()));
 			timeSFruit.play();
 		}
-		fruits.add(new Apple(foodX, foodY)); // add new fruit to fruit array
+		apples.add(new Apple(foodX, foodY)); // add new fruit to fruit array
 	}
 
 	/**
@@ -469,8 +561,23 @@ new java.util.Timer().schedule(
 	 * @param i
 	 *            Position of the fruit in array list
 	 */
-	public void removeFruit(int i) {
-		fruits.remove(i);
+	public void removeApple(int i) {
+		apples.remove(i);
+	}
+	
+	
+	//same for banaanaa
+	
+	private void removeBanana(int i) {
+		// TODO Auto-generated method stub
+		bananas.remove(i);
+		
+	}
+	
+	private void removePear(int i) {
+		// TODO Auto-generated method stub
+		pears.remove(i);
+		
 	}
 
 	/**
@@ -515,10 +622,13 @@ new java.util.Timer().schedule(
 	private void reset() {
 		snake.setStart();
 		obstacles.clear();
-		fruits.clear();
+		apples.clear();
+		//+++
+		bananas.clear();
 		score = fruitsEaten = 0;
 		addObstacle = true;
 		superState = false;
+		life=3;
 		removeSuperFruit();
 		obstaclesNumber = Obstacle.OBSTACLES_START_NUMBER;
 	}
@@ -528,8 +638,16 @@ new java.util.Timer().schedule(
 	 * 
 	 * @return Array with fruits
 	 */
-	public ArrayList<Apple> getFruits() {
-		return fruits;
+	public ArrayList<Apple> getApples() {
+		return apples;
+	}
+	//+++++
+	public ArrayList<Banana> getBananas() {
+		return bananas;
+	}
+	
+	public ArrayList<Pear> getPears() {
+		return pears;
 	}
 
 	/**

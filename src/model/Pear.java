@@ -1,32 +1,45 @@
 package model;
 
+import javafx.scene.paint.Color;
 import utils.Constants;
 
-public  class Pear extends Fruit {
+public class Pear extends Fruit{
 	
-	private Cell pearPos;
-	private Cell lastPos;
+	public static final int SIZE = 20;
+	protected int X, Y;
+
+	/**
+	 * Color of normal fruit
+	 */
+	public static final Color FRUIT_COLOR = Color.GREEN;
 	
-	
-	public Pear () {
+	public Pear(int x, int y) {
 		super(Constants.pearAppearAfterSEC,Constants.pointsAddedPear,Constants.lenghtAddedPear);
-		pearPos=new Cell();
-		pearPos.pearPostion();
-		lastPos=pearPos;
+		this.X=x;
+		this.Y=y;
 	}
-	
-	
-	
-	
-	public void setPos() {
-		
-		Cell pos=new Cell();
-		pos=pos.pearPostion();
-		while (pos.equals(lastPos)) {
-			pos=pos.pearPostion();
-			
-		}
-		lastPos=pearPos;
-		pearPos=pos;
+
+	public int getX() {
+		return X;
+	}
+
+	public void setX(int x) {
+		X = x;
+	}
+
+	public int getY() {
+		return Y;
+	}
+
+	public void setY(int y) {
+		Y = y;
+	}
+
+	public static int getSize() {
+		return SIZE;
+	}
+
+	public static Color getFruitColor() {
+		return FRUIT_COLOR;
 	}
 }

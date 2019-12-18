@@ -18,11 +18,11 @@ public class ScoreView {
 	/**
 	 * Color of score label
 	 */
-	private final Color scoreColor = Color.YELLOW;
+	private final Color scoreColor = Color.GREEN;
 	/**
 	 * Color of the score panel
 	 */
-	private final Color scoreFieldColor = Color.rgb(100, 60, 100);
+	private final Color scoreFieldColor = Color.rgb(31, 58, 0);
 	
 	public ScoreView() {
 		

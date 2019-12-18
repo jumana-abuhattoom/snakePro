@@ -3,13 +3,14 @@ package view;
 import java.util.ArrayList;
 
 import controller.Controller;
-import model.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -17,6 +18,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.*;
 
 public class MainView{
 
@@ -31,7 +33,7 @@ public class MainView{
 	/**
 	 * Color of the scene
 	 */
-	public final static String SCENE_COLOR = "yellow";
+	public final static String SCENE_COLOR = "white";
 	/**
 	 * Snake object
 	 */
@@ -51,7 +53,14 @@ public class MainView{
 	/**
 	 * Array to hold fruits passed by board class
 	 */
-	private ArrayList<Apple> fruits;
+	private ArrayList<Apple> apples;
+	
+	//++++++
+	private ArrayList<Banana> bananas;
+	private ArrayList<Pear> pears;
+
+
+	
 	/**
 	 * Object that holds the super fruit by board class
 	 */
@@ -73,10 +82,15 @@ public class MainView{
 	 * Default constructor initializes the basic variables and objects
 	 */
 	public MainView() {
-		
-		board = new Board();
+		board=new Board();		
 		snake = board.getSnake();
-		fruits = board.getFruits();
+		apples = board.getApples();
+		//+++
+		bananas=board.getBananas();
+		pears=board.getPears();
+		
+		
+		
 		sFruit = board.getSuperFruit();
 		obstacles = board.getObstacles();
 		
@@ -84,16 +98,24 @@ public class MainView{
 		stage.setTitle("Snake");
 		
 		canvas = new Pane();
-		canvas.setStyle("-fx-background-color: "+SCENE_COLOR);
+	  canvas.setStyle("-fx-background-color: "+SCENE_COLOR);
+		
+		canvas.setStyle(" -fx-background-image: url(/icon/test.png)");
+	
         canvas.setPrefSize(WIDTH,HEIGHT);
+     
         
 		stack = new StackPane();
 		grid = new GridPane();
 		
 	    g = new Group();
 		scene = new Scene(g, WIDTH, HEIGHT + ScoreView.SCORE_HEIGHT);
-		scene.setFill(Color.web(SCENE_COLOR));
-		
+	//	scene.setFill(Color.web(SCENE_COLOR));
+		//+++++++++++
+		Image img = new Image("/icon/startBackground.jpg");
+		scene.setFill(new ImagePattern(img));
+
+		//+++++++++++
 		render();
 	}
 	
@@ -165,7 +187,7 @@ public class MainView{
 		
 		int helpX, helpY, snakeY, snakeX; // variables for loops
 		
-		// snake's head to canvas
+		// snake's head to canvas +++++ eza bdna nzed kober lcirilerfnpa
 		Circle c = new Circle(snake.getHead().getX() , snake.getHead().getY(), GameObject.SIZE/2); 
 		c.setFill(BodyPart.HEAD_COLOR);
 		canvas.getChildren().add(c);
@@ -185,19 +207,49 @@ public class MainView{
 			canvas.getChildren().add(c);
 		}
 		// loading fruits to canvas
-		for(int i = 0; i < fruits.size(); ++i) {
-			helpX = fruits.get(i).getX();
-			helpY = fruits.get(i).getY();
-			c = new Circle(helpX , helpY, GameObject.SIZE/2); 
-			c.setFill(Apple.FRUIT_COLOR);
+		for(int i = 0; i < apples.size(); ++i) {
+			helpX = apples.get(i).getX();
+			helpY = apples.get(i).getY();
+			c = new Circle(helpX , helpY, GameObject.SIZE*2/3);
+			//add photo to apple
+			Image img = new Image("/icon/apple.png");
+			c.setFill(new ImagePattern(img));
+			canvas.getChildren().add(c);
+			
+		}
+		//++++++++++++++++
+		
+		for(int i = 0; i < bananas.size(); ++i) {
+			helpX = bananas.get(i).getX();
+			helpY = bananas.get(i).getY();
+			c = new Circle(helpX , helpY, GameObject.SIZE*2/3); 
+			
+			
+			Image img = new Image("/icon/p.png");
+			c.setFill(new ImagePattern(img));
+	
 			canvas.getChildren().add(c);
 		}
-		// loading the super fruit to canvas
-		if(sFruit != null) {			
-			c = new Circle(sFruit.getX() , sFruit.getY(), GameObject.SIZE/2); 
-			c.setFill(SuperFruit.SUPER_FRUIT_COLOR);
+		
+		//+++++++++++++++++
+		for(int i = 0; i < pears.size(); ++i) {
+			helpX = pears.get(i).getX();
+			helpY = pears.get(i).getY();
+			c = new Circle(helpX , helpY, GameObject.SIZE*2/3); 
+			
+			Image img = new Image("/icon/pear.png");
+			c.setFill(new ImagePattern(img));
+			
 			canvas.getChildren().add(c);
+			
 		}
+		
+		
+		
+		
+	
+		
+		
 		// loading obstacles to canvas
 		for(int i = 0; i < obstacles.size(); ++i) {
 			helpX = obstacles.get(i).getX();
@@ -206,8 +258,15 @@ public class MainView{
 			r.setFill(Obstacle.OBSTACLE_COLOR);
 			canvas.getChildren().add(r);
 		}
-		// adding canvas that holds the game objects, and stack that holds the score display, together
-	
+		
+		// loading the super fruit to canvas
+				if(sFruit != null) {			
+					c = new Circle(sFruit.getX() , sFruit.getY(), GameObject.SIZE/2); 
+					c.setFill(SuperFruit.SUPER_FRUIT_COLOR);
+					canvas.getChildren().add(c);
+				}
+		
+	   // adding canvas that holds the game objects, and stack that holds the score display, together
 		grid.add(stack, 0, 1);
 		grid.add(canvas, 0, 0);
 		

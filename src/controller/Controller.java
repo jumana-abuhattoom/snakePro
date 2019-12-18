@@ -2,14 +2,14 @@ package controller;
 
 import java.net.URISyntaxException;
 
-import model.*;
-import view.MainView;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import model.*;
+import view.MainView;
 
 public class Controller{
 
