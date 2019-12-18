@@ -1,28 +1,172 @@
 {
-  "questions"[
+  "questions": [
     {
-      "question": "q1",
+      "question": "How many values and principles Agile has?",
       "answers": [
-        "answer1",
-        "answer2",
-        "answer3",
-        "answer4"
+        "Two",
+        "Three",
+        "Four",
+        "Five"
       ],
       "correct_ans": "2",
       "level": "1",
-      "team": "animal"
+      "team": "Hawk"
     },
     {
-      "question": "q2",
+      "question": "Which of the following is an Agile role?",
       "answers": [
-        "answer1",
-        "answer2",
-        "answer3",
-        "answer4"
+        "Product owner",
+        "Manager",
+        "Secretary",
+        "Lab Worker"
+      ],
+      "correct_ans": "0",
+      "level": "2",
+      "team": "Hawk"
+    },
+    {
+      "question": "Which of the following is one of the\n formal reviews process?",
+      "answers": [
+        "improvise a session with group of members",
+        "post review activities",
+        "talking with the manager about sessions",
+        "gathering results"
       ],
       "correct_ans": "1",
       "level": "2",
-      "team": "animal"
+      "team": "Hawk"
+    },
+    {
+      "question": " Is TDD an Agile methodology?",
+      "answers": [
+        "Yes",
+        "No",
+        "I dont know",
+        "we didnt learn about it"
+      ],
+      "correct_ans": "0",
+      "level": "1",
+      "team": "Hawk"
+    },
+    {
+      "question": "What is quality analyst in testing?",
+      "answers": [
+        "quality assurance throughout hardware development life cycle",
+        "quality assurance and solving bugs ",
+        "applies the principles and practices of software quality assurance",
+        "testing hardware issues"
+      ],
+      "correct_ans": "2",
+      "level": "2",
+      "team": "Hawk"
+    },
+    {
+      "question": "How do you use QA in Agile?",
+      "answers": [
+        "talk with the manager once in two weeks",
+        "Attend daily stand ups",
+        "send updates evrey two weeks",
+        "in agile we work seperately"
+      ],
+      "correct_ans": "1",
+      "level": "2",
+      "team": "Hawk"
+    },
+    {
+      "question": "When does the requirements step gets into the project ?",
+      "answers": [
+        "In the first levels",
+        "level after design",
+        "before writing the first document",
+        "In the development stage"
+      ],
+      "correct_ans": "1",
+      "level": "2",
+      "team": "Hawk"
+    },
+	{
+      "question": "which of type following is highest degree\n of integration in cloud computing?",
+      "answers": [
+        "Caas",
+        "Aaas",
+        "Paas",
+        "Saas"
+      ],
+      "correct_ans": "3",
+      "level": "2",
+      "team": "Hawk"
+    },
+	{
+      "question": "which of the architecture layer is used as\n front end in cloud computing?",
+      "answers": [
+        "client",
+        "cloud",
+        "soft",
+        "all of the mentioned"
+      ],
+      "correct_ans": "0",
+      "level": "2",
+      "team": "Hawk"
+    },
+	{
+      "question": "which of the architecture layer is used as\n front end in cloud computing?",
+      "answers": [
+        "client",
+        "cloud",
+        "soft",
+        "all of the mentioned"
+      ],
+      "correct_ans": "0",
+      "level": "2",
+      "team": "Hawk"
+    },
+	{
+      "question": "which of the architecture layer is used as\n front end in cloud computing?",
+      "answers": [
+        "client",
+        "cloud",
+        "soft",
+        "all of the mentioned"
+      ],
+      "correct_ans": "0",
+      "level": "2",
+      "team": "Hawk"
+    },
+	{
+      "question": "which of the architecture layer is used as\n front end in cloud computing?",
+      "answers": [
+        "client",
+        "cloud",
+        "soft",
+        "all of the mentioned"
+      ],
+      "correct_ans": "0",
+      "level": "2",
+      "team": "Hawk"
+    },
+	{
+      "question": "What is the difficulty in maintenance?",
+      "answers": [
+        "takes 28%of total cost of a product",
+        "takes 67% of total cost of a product",
+        "there is no difficulties in maintenance",
+        "all of the mentioned are wrong"
+      ],
+      "correct_ans": "1",
+      "level": "2",
+      "team": "Hawk"
+    },
+	{
+      "question": "What is Required of Maintenance Programmers?",
+      "answers": [
+        "must have superb debugging skills",
+        "should be a good analyst ",
+        "should have a good skills of management ",
+        "none of the above"
+      ],
+      "correct_ans": "0",
+      "level": "2",
+      "team": "Hawk"
     }
   ]
 }
