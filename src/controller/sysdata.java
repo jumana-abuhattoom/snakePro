@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.BufferedReader;
+
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,7 +23,7 @@ import utils.E_Level;
 public class sysdata {
     //Players and questions
     public Set<Player> players;
-    public Set<Question> questions;
+    public  Set<Question> questions;
     //singletone's instance 
     private static sysdata instance; 
     private sysdata(){ 
@@ -37,6 +38,8 @@ public class sysdata {
        } else 
            return instance;
    }
+   
+   
     
    //Adding new player 
     public boolean AddPlayer(String name, String password){ 
@@ -86,7 +89,7 @@ public class sysdata {
         }
          // duplicate question numbers
         for (Question qq : questions) {
-			if(qq.questionNumber.equals(questionNumber)) {
+			if(qq.getQuestionNumber().equals(questionNumber)) {
 				return false;
 			}
 		}
@@ -124,7 +127,7 @@ public class sysdata {
 		if(num == null ) return false; 
 		
 		for (Question q : questions) {
-			if(q.questionNumber.equals(num)) { 
+			if(q.getQuestionNumber().equals(num)) { 
 				questions.remove(q);
 				return true;
 			}

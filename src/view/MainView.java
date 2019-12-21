@@ -58,6 +58,11 @@ public class MainView{
 	//++++++
 	private ArrayList<Banana> bananas;
 	private ArrayList<Pear> pears;
+	private ArrayList <Question> easyQuestions;
+	private ArrayList <Question> mediumQuestions;
+	private ArrayList <Question> hardQuestions;
+
+
 
 
 	
@@ -88,7 +93,9 @@ public class MainView{
 		//+++
 		bananas=board.getBananas();
 		pears=board.getPears();
-		
+		easyQuestions=board.getEasyQ();
+		mediumQuestions=board.getMediumQ();
+		hardQuestions=board.getHardQ();
 		
 		
 		sFruit = board.getSuperFruit();
@@ -217,7 +224,7 @@ public class MainView{
 			canvas.getChildren().add(c);
 			
 		}
-		//++++++++++++++++
+		//++++++ BANANAAA VIEW
 		
 		for(int i = 0; i < bananas.size(); ++i) {
 			helpX = bananas.get(i).getX();
@@ -225,13 +232,13 @@ public class MainView{
 			c = new Circle(helpX , helpY, GameObject.SIZE*2/3); 
 			
 			
-			Image img = new Image("/icon/p.png");
+			Image img = new Image("/icon/banana.png");
 			c.setFill(new ImagePattern(img));
 	
 			canvas.getChildren().add(c);
 		}
 		
-		//+++++++++++++++++
+		//+++++++++++++++++ PEARS VIEW
 		for(int i = 0; i < pears.size(); ++i) {
 			helpX = pears.get(i).getX();
 			helpY = pears.get(i).getY();
@@ -243,6 +250,45 @@ public class MainView{
 			canvas.getChildren().add(c);
 			
 		}
+		// +++ EASY QUESTION VIEW
+		for(int i = 0; i < easyQuestions.size(); ++i) {
+			helpX = easyQuestions.get(i).getX();
+			helpY = easyQuestions.get(i).getY();
+			c = new Circle(helpX , helpY, GameObject.SIZE*2/3); 
+			
+			Image img = new Image("/icon/easyQ.png");
+			c.setFill(new ImagePattern(img));
+			
+			canvas.getChildren().add(c);
+			
+		}
+		
+		// +++ MEDIUM QUESTION VIEW
+		for(int i = 0; i < mediumQuestions.size(); ++i) {
+			helpX = mediumQuestions.get(i).getX();
+			helpY = mediumQuestions.get(i).getY();
+			c = new Circle(helpX , helpY, GameObject.SIZE*2/3); 
+			
+			Image img = new Image("/icon/mediumQ.png");
+			c.setFill(new ImagePattern(img));
+			
+			canvas.getChildren().add(c);
+			
+		}
+		
+		// +++ HARD  QUESTION VIEW
+				for(int i = 0; i < hardQuestions.size(); ++i) {
+					helpX = hardQuestions.get(i).getX();
+					helpY = hardQuestions.get(i).getY();
+					c = new Circle(helpX , helpY, GameObject.SIZE*2/3); 
+					
+					Image img = new Image("/icon/hardQ.png");
+					c.setFill(new ImagePattern(img));
+					
+					canvas.getChildren().add(c);
+					
+				}
+		
 		
 		
 		

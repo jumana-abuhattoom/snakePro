@@ -33,7 +33,7 @@
         "gathering results"
       ],
       "correct_ans": "1",
-      "level": "2",
+      "level": "1",
       "team": "Hawk"
     },
     {
@@ -57,7 +57,7 @@
         "testing hardware issues"
       ],
       "correct_ans": "2",
-      "level": "2",
+      "level": "1",
       "team": "Hawk"
     },
     {
@@ -129,7 +129,7 @@
         "all of the mentioned"
       ],
       "correct_ans": "0",
-      "level": "2",
+      "level": "3",
       "team": "Hawk"
     },
 	{
@@ -139,30 +139,6 @@
         "cloud",
         "soft",
         "all of the mentioned"
-      ],
-      "correct_ans": "0",
-      "level": "2",
-      "team": "Hawk"
-    },
-	{
-      "question": "What is the difficulty in maintenance?",
-      "answers": [
-        "takes 28%of total cost of a product",
-        "takes 67% of total cost of a product",
-        "there is no difficulties in maintenance",
-        "all of the mentioned are wrong"
-      ],
-      "correct_ans": "1",
-      "level": "2",
-      "team": "Hawk"
-    },
-	{
-      "question": "What is Required of Maintenance Programmers?",
-      "answers": [
-        "must have superb debugging skills",
-        "should be a good analyst ",
-        "should have a good skills of management ",
-        "none of the above"
       ],
       "correct_ans": "0",
       "level": "2",

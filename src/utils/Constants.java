@@ -16,6 +16,7 @@ public final class Constants {
 	public static final int pointsAddedPear=20;
 	public static final int lenghtAddedPear=1;
 	public static final int lifeAddedMouse=1;
+	
 
 
 }

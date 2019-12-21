@@ -3,15 +3,17 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 import controller.Controller;
+import controller.sysdata;
 import javafx.animation.*;
 import javafx.util.Duration;
 import utils.Constants;
+import utils.E_Level;
 import view.MainView;
 import view.ScoreView;
 
 public class Board {
-
 	/**
 	 * Number of GameObjects to store in X-axis
 	 */
@@ -26,8 +28,13 @@ public class Board {
 	private ArrayList<Apple> apples;
 	private ArrayList<Banana> bananas;
 	private ArrayList<Pear> pears;
+	private ArrayList<Question> allQuestions;
 
-	
+	private ArrayList<Question> easyQ; // to hold question in game
+	private ArrayList<Question> medeiumQ; // to hold quesiton that have been answered so it wont get repeated
+	private ArrayList<Question> hardQ;
+	private ArrayList<Integer> lastPlacePear;
+
 	/**
 	 * Super fruit object
 	 */
@@ -82,25 +89,27 @@ public class Board {
 	 * Timers for super fruit and it's effect
 	 */
 	private Timeline timeSuper, timeSFruit;
-	
-	
-	
-	
-	
-	
 
 	/**
 	 * Default constructor of board class to initialize starting variables
 	 */
 	public Board() {
-
+//++
+		allQuestions= new ArrayList<>();
+		allQuestions.addAll(sysdata.getInstance().questions); //add all question from sys data to game question arraylist
+		
+		
 		scoreView = new ScoreView();
 		apples = new ArrayList<>();
-		//++++
-		bananas=new ArrayList<>();
-		pears=new ArrayList<>();
+		// ++++
+		bananas = new ArrayList<>();
+		pears = new ArrayList<>();
+		easyQ = new ArrayList<>();
+		medeiumQ = new ArrayList<>();
+		hardQ = new ArrayList<>();
+         lastPlacePear=new ArrayList<>();
 		
-		obstacles = new ArrayList<>();
+         obstacles = new ArrayList<>();
 		score = fruitsEaten = 0;
 		snake = new Snake();
 		rand = new Random();
@@ -108,7 +117,7 @@ public class Board {
 		state = GameState.Started;
 		sFruit = null;
 		isSuper = false;
-		superState = false;
+		superState = true;
 		addObstacle = true;
 		obstaclesNumber = Obstacle.OBSTACLES_START_NUMBER;
 
@@ -145,43 +154,47 @@ public class Board {
 			}
 		}
 
+//		if (!superState) { // check when snake isn't immune - didn't eat super fruit
+		
+		
+		
 		// checks if snake hit obstacle
-		if (!superState) { // check when snake isn't immune - didn't eat super fruit
+		for (int i = 0; i < obstacles.size(); ++i) {
 
-			for (int i = 0; i < obstacles.size(); ++i) {
+			helpX = obstacles.get(i).getX();
+			helpY = obstacles.get(i).getY();
 
-				helpX = obstacles.get(i).getX();
-				helpY = obstacles.get(i).getY();
-
-				if (helpX == headX && helpY == headY) {
-					life -= 1;
-					if (life == 0) {
-						highscore = score;
-						reset();
-						return GameState.Finished;
-					} else if (life > 0) {
-						snake.setSnakePosition();
-					}
+			if (helpX == headX && helpY == headY) {
+				life -= 1;
+				if (life == 0) {
+					highscore = score;
+					reset();
+					return GameState.Finished;
+				} else if (life > 0) {
+					snake.setSnakePosition();
 				}
 			}
 		}
+//		}
 
 		return Controller.getState();
 	}
 
 	/**
 	 * update life of game
+	 * 
 	 * @return
 	 */
 	public GameState updateLife() {
-		this.life-=1;
-		if(this.life==0) {
+		this.life -= 1;
+		if (this.life == 0) {
 			highscore = score;
 			reset();
 			return GameState.Finished;
 		}
 		return Controller.getState();
 	}
+
 	
 	
 	public int getLife() {
@@ -205,7 +218,130 @@ public class Board {
 			placeObstacles();
 		}
 	}
+	/** 
+	  * Looks for a point on the board to add new PEAR. Checks it to not collide
+	 * with the snake body/ other fruits/questions
+	 */
+	private int[] placePear() {
+		
+		int[] point = new int[2];
+		ArrayList<Integer> screenCorners = new ArrayList<Integer>(); // arraylist that contains corners points
+		boolean same=true;
+		int tmpX, tmpY ;
+		
 
+		screenCorners.add(BWIDTH *GameObject.SIZE-50);
+		screenCorners.add(GameObject.SIZE+GameObject.SIZE / 2);
+
+		
+		while (same) {
+			tmpX = screenCorners.get(new Random().nextInt(screenCorners.size()));
+			tmpY = screenCorners.get(new Random().nextInt(screenCorners.size()));
+			
+			if (lastPlacePear.isEmpty()) {
+				point[0] = tmpX;
+				point[1] = tmpY;
+				same = false;
+				return point;
+			}
+			if (lastPlacePear.get(0) == tmpX && lastPlacePear.get(1) == tmpY) {
+
+				same = true;
+			}
+			
+			
+			//check collision 
+			else {
+		lastPlacePear.removeAll(lastPlacePear); 
+		same =false;
+		point[0] = tmpX;
+		point[1] = tmpY;
+		return point;}
+		}
+		return point;
+	}
+//	/**
+//	 * Method to Check that pear
+//	 * @param pearX
+//	 * @param pearY
+//	 * @return
+//	 */
+//	
+//	private boolean pearCheckCollision(int pearX,int pearY) {
+//		int  helpX, helpY;
+//
+//		for (int i = 0; i < snake.getSize(); ++i) { // to not collide with SNAKE
+//
+//			helpX = snake.getBodyPart(i).getX();
+//			helpY = snake.getBodyPart(i).getY();
+//			if (helpX == pearX && helpY == pearY) {
+//				return true;
+//			}
+//		}
+//		for (int i = 0; i < apples.size(); ++i) { // to not collide with APPLE
+//
+//			helpX = apples.get(i).getX();
+//			helpY = apples.get(i).getY();
+//
+//			if (helpX == pearX && helpY == pearY) {
+//				return true;
+//			}
+//		}
+//
+//		for (int i = 0; i < bananas.size(); ++i) { // to not collide with BANANA
+//
+//			helpX = bananas.get(i).getX();
+//			helpY = bananas.get(i).getY();
+//
+//			if (helpX == pearX && helpY == pearY) {
+//				return true;
+//			}
+//		}
+//
+//		for (int i = 0; i < easyQ.size(); ++i) { // to not collide with easyQ
+//
+//			helpX = easyQ.get(i).getX();
+//			helpY = easyQ.get(i).getY();
+//
+//			if (helpX == pearX && helpY == pearY) {
+//				return true;
+//			}
+//		}
+//		for (int i = 0; i < medeiumQ.size(); ++i) { // to not collide with mediumQ
+//
+//			helpX = medeiumQ.get(i).getX();
+//			helpY = medeiumQ.get(i).getY();
+//
+//			if (helpX == pearX && helpY == pearY) {
+//				return true;
+//			}
+//		}
+//		for (int i = 0; i < hardQ.size(); ++i) { // to not collide with hardQ
+//
+//			helpX = hardQ.get(i).getX();
+//			helpY = hardQ.get(i).getY();
+//
+//			if (helpX == pearX && helpY == pearY) {
+//				return true;
+//			}
+//		}
+//		for (int i = 0; i < obstacles.size(); ++i) { // to not collide with Obstacles
+//
+//			helpX = obstacles.get(i).getX();
+//			helpY = obstacles.get(i).getY();
+//
+//			if (helpX == pearX && helpY == pearY) {
+//				return true;
+//			}
+//		}
+//
+//		return false;
+//	}
+//	
+		
+		
+
+	
 	/**
 	 * Looks for a point on the board to add new obstacle. Checks it to not collide
 	 * with the snake body or fruits
@@ -221,7 +357,6 @@ public class Board {
 			helpS = helpF = false;
 			obstacleX = (rand.nextInt(BWIDTH) * GameObject.SIZE) + GameObject.SIZE / 2; // random point on board
 			obstacleY = (rand.nextInt(BHEIGHT) * GameObject.SIZE) + GameObject.SIZE / 2;
-
 			for (int i = 0; i < snake.getSize(); ++i) { // to not collide with snake
 
 				helpX = snake.getBodyPart(i).getX();
@@ -273,14 +408,13 @@ public class Board {
 						}
 					}
 				}
-				
-				
+
 				// if there's a super fruit on board, check to not collide with it
-				if (isSuper) {
-					if (obstacleX == sFruit.getX() && obstacleY == sFruit.getY()) {
-						continue;
-					}
-				}
+//				if (isSuper) {
+//					if (obstacleX == sFruit.getX() && obstacleY == sFruit.getY()) {
+//						continue;
+//					}
+//				}
 
 				// point for obstacle doesn't collide with any snake part or fruit
 				if (helpF) {
@@ -295,10 +429,8 @@ public class Board {
 	/**
 	 * Add new obstacle to array
 	 * 
-	 * @param X
-	 *            coordinate
-	 * @param Y
-	 *            coordinate
+	 * @param X coordinate
+	 * @param Y coordinate
 	 */
 	private void addObstacle(int X, int Y) {
 		obstacles.add(new Obstacle(X, Y));
@@ -312,27 +444,7 @@ public class Board {
 		int headX, headY, foodX, foodY;
 		headX = head.getX();
 		headY = head.getY();
-		
-		
-		// checks if it's the super fruit
-		if (isSuper) {
 
-			if (sFruit.getX() == headX && sFruit.getY() == headY) {
-				removeSuperFruit();
-				++fruitsEaten;
-				score += 3;
-				superState = true;
-				timeSFruit.stop();
-				if (timeSuper != null) {
-					timeSuper.stop();
-				}
-				timeSuper = new Timeline(
-						new KeyFrame(Duration.millis(SuperFruit.SUPER_STATE_TIME), lambda -> superState = false));
-				timeSuper.play();
-				addObstacle = false; // unlock possibility to add another obstacle
-				return;
-			}
-		}
 		// check for a fruit on board //// APPLE  - same for banana 
 		for (int i = 0; i < apples.size(); ++i) {
 
@@ -384,7 +496,7 @@ public class Board {
 			}
 		}
 		
-		// check for pear on boarddd ++++
+		// check for pear on board ++++
 		
 		for (int i = 0; i < pears.size(); ++i) {
 
@@ -392,10 +504,11 @@ public class Board {
 			foodY = pears.get(i).getY();
 
 			if (foodX == headX && foodY == headY) {
-
-				removePear(i);
 				addLength(); // adds body part to snake
 					score+=Constants.pointsAddedPear;
+					lastPlacePear.add(0,pears.get(i).getX());
+					lastPlacePear.add(1,pears.get(i).getY());
+					pears.remove(i);
 
 				new java.util.Timer().schedule(new java.util.TimerTask() {
 					@Override
@@ -407,11 +520,56 @@ public class Board {
 				addObstacle = false;
 			}
 		}
+	// check for EASY QUESTION  on board ++++
 		
+		for (int i = 0; i < easyQ.size(); ++i) {
+
+			foodX = easyQ.get(i).getX();
+			foodY = easyQ.get(i).getY();
+
+			if (foodX == headX && foodY == headY) {
+
+				allQuestions.remove(easyQ.get(i));
+				removeEasyQ(i);
+				updateFruit();
+				//+++++++++ ezed no2att 
+				addObstacle = false;
+			}
+		}
+		
+		// check for MEDIUM QUESTION  on board ++++
+		for (int i = 0; i < medeiumQ.size(); ++i) {
+
+			foodX = medeiumQ.get(i).getX();
+			foodY = medeiumQ.get(i).getY();
+
+			if (foodX == headX && foodY == headY) {
+
+				allQuestions.remove(medeiumQ.get(i));
+				medeiumQ.remove(i);
+				updateFruit();
+				//+++++++++ add score and length to snake 
+				addObstacle = false;
+			}
+		}
+		// check for HARD QUESTION  on board ++++
+		for (int i = 0; i < hardQ.size(); ++i) {
+
+			foodX = hardQ.get(i).getX();
+			foodY = hardQ.get(i).getY();
+
+			if (foodX == headX && foodY == headY) {
+
+				allQuestions.remove(hardQ.get(i));
+				hardQ.remove(i);
+				updateFruit();
+				//+++++++++ add score and length to snake 
+				addObstacle = false;
+			}
+		}
 		
 		
 	}
-
 	
 
 	/**
@@ -425,48 +583,122 @@ public class Board {
 
 		if (apples.size() <= 0) { // if there's no fruit
 
-//			if (fruitsEaten % 3 == 0 && fruitsEaten != 0 && !isSuper) { // adds super fruit
-//				isSuper = true;
-//				place = placeFruit();
-//				sFoodX = place[0];
-//				sFoodY = place[1];
-//			}
 			do {
 				place = placeFruit();
 				foodX = place[0];
 				foodY = place[1];
+				
 			} while (foodX == sFoodX && foodY == sFoodY);
 
 			
 			addFruit(foodX, foodY, sFoodX, sFoodY);
 		}
-		
-		//+++++++++ ana zedet
+		//++++ BANANA 
 		if (bananas.size() <= 0) { // if there's no fruit
 
 			do {
 				place = placeFruit();
 				foodX = place[0];
 				foodY = place[1];
+
 			} while (foodX == sFoodX && foodY == sFoodY);
 
 			bananas.add(new Banana(foodX,foodY));
 		}
 		
-		//++++++++++++++++++++++++++++++++
-		if (pears.size() <= 0) { // if there's no fruit
+		//++++  PEARS 
+		
+ 		if (pears.size() <= 0) { // if there's no fruit
+
+			do {
+				place =placePear();
+				foodX = place[0];
+				foodY = place[1];
+				
+			} while (foodX == sFoodX && foodY == sFoodY);
+
+			pears.add(new Pear(foodX,foodY));
+		}
+		//++++ EASY QUESTIONS 
+		if (easyQ.size() <= 0) { // after eating easy question generate new one
 
 			do {
 				place = placeFruit();
 				foodX = place[0];
 				foodY = place[1];
-			} while (foodX == sFoodX && foodY == sFoodY);
 
-			pears.add(new Pear(foodX,foodY));
+			} while (foodX == sFoodX && foodY == sFoodY);
+			
+			ArrayList <Question> allEasyQ = getArrayBylevel(E_Level.EASY);
+			if(allEasyQ.size()>0) {
+			int rndIndex = getRandomQuestion(allEasyQ);//get random index
+	         Question rndQuestion = allEasyQ.get(rndIndex);  // get random question
+	         rndQuestion.setX(foodX);
+	         rndQuestion.setY(foodY);
+	         easyQ.add(rndQuestion);}
+		}
+		//++++ MEDIUM QUESTION
+		if (medeiumQ.size() <= 0) { // after eating easy question generate new one
+
+			do {
+				place = placeFruit();
+				foodX = place[0];
+				foodY = place[1];
+
+			} while (foodX == sFoodX && foodY == sFoodY);
+			
+			ArrayList <Question> allMediumQ = getArrayBylevel(E_Level.MEDIUM);
+			if(allMediumQ.size()>0) {
+			int rndIndex = getRandomQuestion(allMediumQ);//get random index
+	         Question rndQuestion = allMediumQ.get(rndIndex);  // get random question
+	         rndQuestion.setX(foodX);
+	         rndQuestion.setY(foodY);
+	         
+	         medeiumQ.add(rndQuestion);}
+		}
+		//++++ MEDIUM QUESTION
+		if (hardQ.size() <= 0) { // after eating easy question generate new one
+
+			do {
+				place = placeFruit();
+				foodX = place[0];
+				foodY = place[1];
+
+			} while (foodX == sFoodX && foodY == sFoodY);
+			
+			ArrayList <Question> allHardQ = getArrayBylevel(E_Level.HARD);
+			if(allHardQ.size()>0) {
+			int rndIndex = getRandomQuestion(allHardQ);//get random index
+	         Question rndQuestion = allHardQ.get(rndIndex);  // get random question
+	         rndQuestion.setX(foodX);
+	         rndQuestion.setY(foodY);
+	         
+	         hardQ.add(rndQuestion);}
 		}
 		
+	}
+	
+	
+	
+	
+	
+	/**
+	 * method to return all questions according to level
+	 * @param level
+	 * @return
+	 */
+	private ArrayList <Question> getArrayBylevel (E_Level level){
+		ArrayList <Question> tmp = new ArrayList<>();
+		for(int i=0;i<allQuestions.size();i++) {
+			if(allQuestions.get(i).getLevel()==level)
+				tmp.add(allQuestions.get(i));
+		}
+		return tmp;
 		
 	}
+	
+	
+	
 
 	/**
 	 * Method to place a fruit on the board
@@ -487,6 +719,7 @@ public class Board {
 			foodX = (rand.nextInt(BWIDTH) * GameObject.SIZE) + GameObject.SIZE / 2;
 			foodY = (rand.nextInt(BHEIGHT) * GameObject.SIZE) + GameObject.SIZE / 2;
 
+        //check collision with snake //
 			for (int i = 0; i < snake.getSize(); ++i) {
 
 				helpX = snake.getBodyPart(i).getX();
@@ -520,6 +753,7 @@ public class Board {
 							helpO = true;
 						}
 					}
+					
 				}
 				if (helpO) {
 					collision = false;
@@ -564,21 +798,29 @@ public class Board {
 	public void removeApple(int i) {
 		apples.remove(i);
 	}
-	
-	
-	//same for banaanaa
-	
+
+	// same for banaanaa++++++++
+
 	private void removeBanana(int i) {
 		// TODO Auto-generated method stub
 		bananas.remove(i);
 		
 	}
-	
+
 	private void removePear(int i) {
 		// TODO Auto-generated method stub
 		pears.remove(i);
 		
 	}
+	
+	private void removeEasyQ(int i) {
+		// TODO Auto-generated method stub
+		easyQ.remove(i);
+		
+		
+	}
+
+
 
 	/**
 	 * Method to remove super fruit(make it a null value)
@@ -601,6 +843,7 @@ public class Board {
 	public void updateLifeONview() {
 		scoreView.addLife(life);
 	}
+
 	/**
 	 * Add new part to snake's body after eating a fruit
 	 */
@@ -641,13 +884,26 @@ public class Board {
 	public ArrayList<Apple> getApples() {
 		return apples;
 	}
-	//+++++
+
+	// +++++
 	public ArrayList<Banana> getBananas() {
 		return bananas;
 	}
-	
+
 	public ArrayList<Pear> getPears() {
 		return pears;
+	}
+
+	public ArrayList<Question> getEasyQ() {
+		return easyQ;
+	}
+	
+	public ArrayList<Question> getMediumQ() {
+		return medeiumQ;
+	}
+	
+	public ArrayList<Question> getHardQ() {
+		return hardQ;
 	}
 
 	/**
@@ -710,8 +966,9 @@ public class Board {
 	 * @return Value of GameState
 	 */
 	public GameState getState() {
-		return state;
-	}
+		return state;}
+	
+	
 
 	/**
 	 * Returns true if snake is in super state or false if not
@@ -719,6 +976,21 @@ public class Board {
 	 * @return Boolean true or false
 	 */
 	public boolean getSuperState() {
-		return superState;
-	}
+		return superState;}
+	
+	
+	
+/**++
+ * method to get random index for question
+ * @param questions
+ * @return
+ */
+		private static int getRandomQuestion(ArrayList<Question> questions){
+		    if(!questions.isEmpty()){
+		        return new Random().nextInt(questions.size());
+	        }
+	        else{
+		        return 1;}
+	    }
+
 }
