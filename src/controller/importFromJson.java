@@ -63,7 +63,9 @@ public class importFromJson {
 	
 	
 	public boolean Addquestiontojson(Question q) {
-		sysdata.getInstance().questions.add(q);
+		
+		if(sysdata.getInstance().AddQuestion(q.questionNumber,
+				q.answers, q.IndexOfCorrectAnswer, q.level.getLevel())) {
 		JSONObject jsonObject1 = new JSONObject();
 
 		// JSON object and values
@@ -96,8 +98,93 @@ public class importFromJson {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(jsonObject1);
+		
 		return true;
+		}else {
+			return false;
+		}
+	}
+	public boolean updatequestiontojson(Question q) {
+		if(sysdata.getInstance().UpdateQuestion(q.questionNumber,
+				q.answers, q.IndexOfCorrectAnswer, q.level.getLevel())) {
+		JSONObject jsonObject1 = new JSONObject();
+
+		// JSON object and values
+		JSONArray jsonArray1 = new JSONArray();
+		for (Question s : sysdata.getInstance().questions) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("question", s.questionNumber);
+			JSONArray jsonArray = new JSONArray();
+			jsonArray.put(s.answers.get(0));
+			jsonArray.put(s.answers.get(1));
+			jsonArray.put(s.answers.get(2));
+			jsonArray.put(s.answers.get(3));
+			jsonObject.put("answers", jsonArray);
+			jsonObject.put("correct_ans", s.IndexOfCorrectAnswer);
+			jsonObject.put("level", s.level);
+			jsonObject.put("team", "Rabbit");
+
+			// JSON array and values
+
+			jsonArray1.put(jsonObject);
+
+		}
+		jsonObject1.put("questions", jsonArray1);
+
+		// writing the JSONObject into a file(info.json)
+		try {
+			FileWriter fileWriter = new FileWriter("res/questions.json");
+			fileWriter.write(jsonObject1.toString());
+			fileWriter.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+		}else {
+			return false;
+		}
+	}
+	public boolean reomveQuestiontojson(Question q) {
+		
+	if(sysdata.getInstance().DeleteQuestion(q.questionNumber)) {
+		JSONObject jsonObject1 = new JSONObject();
+	
+		// JSON object and values
+		JSONArray jsonArray1 = new JSONArray();
+		for (Question s : sysdata.getInstance().questions) {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("question", s.questionNumber);
+			JSONArray jsonArray = new JSONArray();
+			jsonArray.put(s.answers.get(0));
+			jsonArray.put(s.answers.get(1));
+			jsonArray.put(s.answers.get(2));
+			jsonArray.put(s.answers.get(3));
+			jsonObject.put("answers", jsonArray);
+			jsonObject.put("correct_ans", s.IndexOfCorrectAnswer);
+			jsonObject.put("level", s.level);
+			jsonObject.put("team", "Rabbit");
+
+			// JSON array and values
+
+			jsonArray1.put(jsonObject);
+
+		}
+		jsonObject1.put("questions", jsonArray1);
+
+		// writing the JSONObject into a file(info.json)
+		try {
+			FileWriter fileWriter = new FileWriter("res/questions.json");
+			fileWriter.write(jsonObject1.toString());
+			fileWriter.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return true;
+	}else {
+		return false;
+	}
 	}
 
 	
