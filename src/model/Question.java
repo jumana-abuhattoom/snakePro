@@ -5,7 +5,32 @@ import java.util.ArrayList;
 import utils.E_Level;
 
 public class Question {
-    public String questionNumber;
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((questionNumber == null) ? 0 : questionNumber.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Question other = (Question) obj;
+		if (questionNumber == null) {
+			if (other.questionNumber != null)
+				return false;
+		} else if (!questionNumber.equals(other.questionNumber))
+			return false;
+		return true;
+	}
+
+	public String questionNumber;
     public ArrayList<String> answers;
     public int IndexOfCorrectAnswer; 
     public E_Level level;

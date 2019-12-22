@@ -97,6 +97,40 @@ public class sysdata {
         questions.add(q);
         return true;
     }
+    public boolean UpdateQuestion(String questionNumber,ArrayList<String> answers,int IndexOfCorrectAnswer,int level){ 
+        if(questionNumber==null || answers==null || IndexOfCorrectAnswer<1 || IndexOfCorrectAnswer>4 || level <1 || level>3) return false;
+        if(questionNumber.charAt(0)!='Q' && questionNumber.charAt(0)!='q') return false;
+        Question q = new Question(questionNumber, answers, IndexOfCorrectAnswer, E_Level.getLevelbyNumber(level)); 
+     
+        // if one of the answers is empty 
+        for (String ans : answers) {
+			if(ans.equals("")) return false; 
+		}
+        
+        //if two answers are identical:
+        
+        if(answers.get(0).equals(answers.get(1))
+        		|| answers.get(0).equals(answers.get(2))
+        				||answers.get(0).equals(answers.get(3))
+        						||answers.get(1).equals(answers.get(2))
+        								||answers.get(2).equals(answers.get(3))
+        									||answers.get(3).equals(answers.get(1))) {
+        	return false;
+        }
+         // duplicate question numbers
+        for (Question qq : questions) {
+			if(qq.questionNumber.equals(questionNumber)) {
+				qq=q;
+				 return true;
+			}
+		}
+        
+        
+        
+        
+       
+        return false;
+    }
        
     //--------------------------------------------------Helping methods for tests------------------------------------------------
     
