@@ -120,7 +120,8 @@ public class sysdata {
          // duplicate question numbers
         for (Question qq : questions) {
 			if(qq.questionNumber.equals(questionNumber)) {
-				qq=q;
+				qq.answers=q.answers;
+				qq.IndexOfCorrectAnswer=q.IndexOfCorrectAnswer;
 				 return true;
 			}
 		}

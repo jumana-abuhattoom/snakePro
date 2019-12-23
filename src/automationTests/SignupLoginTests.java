@@ -19,6 +19,7 @@ class SignupLoginTests {
 		
 		assertEquals(true, b);
 		assertEquals(false, a);
+		
 	}
 	
 	@Test

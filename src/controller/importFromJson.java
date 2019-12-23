@@ -62,7 +62,7 @@ public class importFromJson {
 	
 	
 	
-	public boolean Addquestiontojson(Question q) {
+	public static boolean Addquestiontojson(Question q) {
 		
 		if(sysdata.getInstance().AddQuestion(q.questionNumber,
 				q.answers, q.IndexOfCorrectAnswer, q.level.getLevel())) {
@@ -104,7 +104,7 @@ public class importFromJson {
 			return false;
 		}
 	}
-	public boolean updatequestiontojson(Question q) {
+	public static boolean updatequestiontojson(Question q) {
 		if(sysdata.getInstance().UpdateQuestion(q.questionNumber,
 				q.answers, q.IndexOfCorrectAnswer, q.level.getLevel())) {
 		JSONObject jsonObject1 = new JSONObject();
@@ -145,7 +145,7 @@ public class importFromJson {
 			return false;
 		}
 	}
-	public boolean reomveQuestiontojson(Question q) {
+	public static boolean reomveQuestiontojson(Question q) {
 		
 	if(sysdata.getInstance().DeleteQuestion(q.questionNumber)) {
 		JSONObject jsonObject1 = new JSONObject();
