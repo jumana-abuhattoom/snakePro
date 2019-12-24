@@ -3,6 +3,7 @@ package view;
 import javax.swing.JOptionPane;
 
 import controller.Controller;
+import controller.MainClass;
 import controller.sysdata;
 import model.Player;
 
@@ -120,7 +121,9 @@ public class Login extends javax.swing.JFrame {
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		if(sysdata.getInstance().CheckUsernameAndPassword(jTextField1.getText(),jPasswordField1.getText() )) { 
 			this.setVisible(false);
-		//	Controller.main(null);
+			MainClass mc = new MainClass(); 
+			mc.main(null);
+			
 			return;
 		
 		}

@@ -9,6 +9,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.*;
+import view.MainPage;
 import view.MainView;
 
 public class Controller{
@@ -130,7 +131,9 @@ public class Controller{
 						}
 						break;
 					case ESCAPE: // exit program
-						System.exit(0);
+						
+						MainPage mp = new MainPage(false); 
+						mp.setVisible(true);
 						break;
 					default:
 						break;
@@ -358,6 +361,10 @@ public class Controller{
 		return state;
 	}	
 	
+
+	/// --------------------- SETTERS AND GETTERS 
+
+	
 	/**
 	 * Returns the stage, pass it to Main class
 	 * @return The game stage
@@ -365,4 +372,149 @@ public class Controller{
 	public Stage getStage() {
 		return view.getStage();
 	}
+
+	public boolean isUp() {
+		return up;
+	}
+
+	public void setUp(boolean up) {
+		this.up = up;
+	}
+
+	public boolean isDown() {
+		return down;
+	}
+
+	public void setDown(boolean down) {
+		this.down = down;
+	}
+
+	public boolean isRight() {
+		return right;
+	}
+
+	public void setRight(boolean right) {
+		this.right = right;
+	}
+
+	public boolean isLeft() {
+		return left;
+	}
+
+	public void setLeft(boolean left) {
+		this.left = left;
+	}
+
+	public boolean isPause() {
+		return pause;
+	}
+
+	public void setPause(boolean pause) {
+		this.pause = pause;
+	}
+
+	public boolean isResume() {
+		return resume;
+	}
+
+	public void setResume(boolean resume) {
+		this.resume = resume;
+	}
+
+	public boolean isStart() {
+		return start;
+	}
+
+	public void setStart(boolean start) {
+		this.start = start;
+	}
+
+	public boolean isKeyActive() {
+		return keyActive;
+	}
+
+	public void setKeyActive(boolean keyActive) {
+		this.keyActive = keyActive;
+	}
+
+	public int getDx() {
+		return dx;
+	}
+
+	public void setDx(int dx) {
+		this.dx = dx;
+	}
+
+	public int getDy() {
+		return dy;
+	}
+
+	public void setDy(int dy) {
+		this.dy = dy;
+	}
+
+	public int getSpeedConstraint() {
+		return speedConstraint;
+	}
+
+	public void setSpeedConstraint(int speedConstraint) {
+		this.speedConstraint = speedConstraint;
+	}
+
+	public int getSpeedPointsConstraint() {
+		return speedPointsConstraint;
+	}
+
+	public void setSpeedPointsConstraint(int speedPointsConstraint) {
+		this.speedPointsConstraint = speedPointsConstraint;
+	}
+
+	public Snake getSnake() {
+		return snake;
+	}
+
+	public void setSnake(Snake snake) {
+		this.snake = snake;
+	}
+
+	public BodyPart getHead() {
+		return head;
+	}
+
+	public void setHead(BodyPart head) {
+		this.head = head;
+	}
+
+	public MainView getView() {
+		return view;
+	}
+
+	public void setView(MainView view) {
+		this.view = view;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	public MediaPlayer getAudio() {
+		return audio;
+	}
+
+	public void setAudio(MediaPlayer audio) {
+		this.audio = audio;
+	}
+
+	public static void setState(GameState state) {
+		Controller.state = state;
+	}
+	
+	
+	
+	
+	
 }

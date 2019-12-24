@@ -8,10 +8,6 @@ public class Banana extends Fruit{
 	public static final int SIZE = 20;
 	protected int X, Y;
 
-	/**
-	 * Color of normal fruit
-	 */
-	public static final Color FRUIT_COLOR = Color.YELLOW;
 
 	public Banana(int x, int y) {
 		super(Constants.bnanaAppearAfterSEC,Constants.pointsAddedBnana,Constants.lenghtAddedBnana);
@@ -39,9 +35,6 @@ public class Banana extends Fruit{
 		return SIZE;
 	}
 
-	public static Color getFruitColor() {
-		return FRUIT_COLOR;
 	}
-}
 
 

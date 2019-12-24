@@ -10,7 +10,7 @@
       ],
       "correct_ans": "2",
       "level": "1",
-      "team": "Hawk"
+      "team": "Rabbit"
     },
     {
       "question": "Which of the following is an Agile role?",
@@ -22,7 +22,7 @@
       ],
       "correct_ans": "0",
       "level": "2",
-      "team": "Hawk"
+      "team": "Rabbit"
     },
     {
       "question": "Which of the following is one of the\n formal reviews process?",
@@ -34,7 +34,7 @@
       ],
       "correct_ans": "1",
       "level": "1",
-      "team": "Hawk"
+      "team": "Rabbit"
     },
     {
       "question": " Is TDD an Agile methodology?",
@@ -46,7 +46,7 @@
       ],
       "correct_ans": "0",
       "level": "1",
-      "team": "Hawk"
+      "team": "Rabbit"
     },
     {
       "question": "What is quality analyst in testing?",
@@ -58,7 +58,7 @@
       ],
       "correct_ans": "2",
       "level": "1",
-      "team": "Hawk"
+      "team": "Rabbit"
     },
     {
       "question": "How do you use QA in Agile?",
@@ -70,7 +70,7 @@
       ],
       "correct_ans": "1",
       "level": "2",
-      "team": "Hawk"
+      "team": "Rabbit"
     },
     {
       "question": "When does the requirements step gets into the project ?",
@@ -82,7 +82,7 @@
       ],
       "correct_ans": "1",
       "level": "2",
-      "team": "Hawk"
+      "team": "Rabbit"
     },
 	{
       "question": "which of type following is highest degree\n of integration in cloud computing?",
@@ -94,7 +94,7 @@
       ],
       "correct_ans": "3",
       "level": "2",
-      "team": "Hawk"
+      "team": "Rabbit"
     },
 	{
       "question": "which of the architecture layer is used as\n front end in cloud computing?",
@@ -106,7 +106,7 @@
       ],
       "correct_ans": "0",
       "level": "2",
-      "team": "Hawk"
+      "team": "Rabbit"
     },
 	{
       "question": "which of the architecture layer is used as\n front end in cloud computing?",
@@ -118,7 +118,7 @@
       ],
       "correct_ans": "0",
       "level": "2",
-      "team": "Hawk"
+      "team": "Rabbit"
     },
 	{
       "question": "which of the architecture layer is used as\n front end in cloud computing?",
@@ -130,7 +130,7 @@
       ],
       "correct_ans": "0",
       "level": "3",
-      "team": "Hawk"
+      "team": "Rabbit"
     },
 	{
       "question": "which of the architecture layer is used as\n front end in cloud computing?",
@@ -142,7 +142,7 @@
       ],
       "correct_ans": "0",
       "level": "2",
-      "team": "Hawk"
+      "team": "Rabbit"
     }
   ]
 }

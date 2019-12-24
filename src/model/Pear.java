@@ -8,10 +8,7 @@ public class Pear extends Fruit{
 	public static final int SIZE = 20;
 	protected int X, Y;
 
-	/**
-	 * Color of normal fruit
-	 */
-	public static final Color FRUIT_COLOR = Color.GREEN;
+	
 	
 	public Pear(int x, int y) {
 		super(Constants.pearAppearAfterSEC,Constants.pointsAddedPear,Constants.lenghtAddedPear);
@@ -39,7 +36,4 @@ public class Pear extends Fruit{
 		return SIZE;
 	}
 
-	public static Color getFruitColor() {
-		return FRUIT_COLOR;
-	}
 }

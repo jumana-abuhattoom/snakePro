@@ -58,9 +58,9 @@ public class MainView{
 	//++++++
 	private ArrayList<Banana> bananas;
 	private ArrayList<Pear> pears;
-	private ArrayList <Question> easyQuestions;
-	private ArrayList <Question> mediumQuestions;
-	private ArrayList <Question> hardQuestions;
+	private ArrayList<Question> easyQuestions;
+	private ArrayList<Question> mediumQuestions;
+	private ArrayList<Question> hardQuestions;
 
 
 
@@ -336,8 +336,8 @@ public class MainView{
 		smallText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
 		smallText.setFill(Color.DARKGREEN);
 		
-		c1 = new Circle(WIDTH/2 - 200, HEIGHT/2 + 150, GameObject.SIZE/2, Apple.FRUIT_COLOR);
-		c2 = new Circle(WIDTH/2 - 200, HEIGHT/2 + 190, GameObject.SIZE/2, SuperFruit.SUPER_FRUIT_COLOR);
+		c1 = new Circle(WIDTH/2 - 200, HEIGHT/2 + 150, GameObject.SIZE/2);
+		c2 = new Circle(WIDTH/2 - 200, HEIGHT/2 + 190, GameObject.SIZE/2);
 		r = new Rectangle(WIDTH/2 - 210, HEIGHT/2 + 220, GameObject.SIZE, GameObject.SIZE);
 		r.setFill(Obstacle.OBSTACLE_COLOR);
 		

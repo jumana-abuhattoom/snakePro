@@ -72,6 +72,18 @@ class ManageQuestionsTests {
 		
 		assertEquals(false, a);
 	}
+	@Test
+	void Check_Questions_Number() { 
+		assertEquals(1,sysdata.getInstance().questions.size());
+		ArrayList<String> answers = new ArrayList<String>(); 
+		answers.add("rrr"); answers.add("abc"); answers.add("kdl"); answers.add("jdj");
+		sysdata.getInstance().AddQuestion("Q7",answers,2, 3);
+		assertEquals(2,sysdata.getInstance().questions.size());
+		
+		
+	}
+	
+	
 	
 	
 	
