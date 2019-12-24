@@ -20,7 +20,7 @@ public class DeletingQuestion extends javax.swing.JFrame {
     public DeletingQuestion() {
         initComponents();
         for(Question q : sysdata.getInstance().questions){
-        	jComboBox1.addItem(q.questionNumber);
+        	jComboBox1.addItem(q.getQuestionNumber());
         }
     }
 
@@ -43,12 +43,12 @@ public class DeletingQuestion extends javax.swing.JFrame {
         		
         		String num = jComboBox1.getSelectedItem().toString();
         		for(Question q : sysdata.getInstance().questions) { 
-        			if(q.questionNumber.equals(num)) { 
+        			if(q.getQuestionNumber().equals(num)) { 
         				sysdata.getInstance().DeleteQuestion(num); 
         				JOptionPane.showMessageDialog(rootPane, "Your Question have been deleted Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
         				jComboBox1.removeAllItems(); 
         				for(Question w : sysdata.getInstance().questions){
-        			        	jComboBox1.addItem(w.questionNumber);
+        			        	jComboBox1.addItem(w.getQuestionNumber());
         			        }
         				return; 
         			}

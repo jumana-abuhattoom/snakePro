@@ -33,7 +33,9 @@ public class importFromJson {
 			JSONArray questions = (JSONArray) json.get("questions");
 			for (int i = 0; i < questions.length(); ++i) {
 			Question qtoadd = importingQuestion(questions , i ); 
+
 				sysdata.getInstance().questions.add(qtoadd);
+			
 			}
 
 			
@@ -70,15 +72,15 @@ public class importFromJson {
 		JSONArray jsonArray1 = new JSONArray();
 		for (Question s : sysdata.getInstance().questions) {
 			JSONObject jsonObject = new JSONObject();
-			jsonObject.put("question", s.questionNumber);
+			jsonObject.put("question", s.getQuestionNumber());
 			JSONArray jsonArray = new JSONArray();
-			jsonArray.put(s.answers.get(0));
-			jsonArray.put(s.answers.get(1));
-			jsonArray.put(s.answers.get(2));
-			jsonArray.put(s.answers.get(3));
+			jsonArray.put(s.getAnswers().get(0));
+			jsonArray.put(s.getAnswers().get(1));
+			jsonArray.put(s.getAnswers().get(2));
+			jsonArray.put(s.getAnswers().get(3));
 			jsonObject.put("answers", jsonArray);
-			jsonObject.put("correct_ans", s.IndexOfCorrectAnswer);
-			jsonObject.put("level", s.level);
+			jsonObject.put("correct_ans", s.getIndexOfCorrectAnswer());
+			jsonObject.put("level", s.getLevel());
 			jsonObject.put("team", "Rabbit");
 
 			// JSON array and values
