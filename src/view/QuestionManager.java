@@ -1,4 +1,10 @@
 package view;
+import javax.swing.JButton;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Color;
+import java.awt.Font;
 
 public class QuestionManager extends javax.swing.JFrame {
 
@@ -6,6 +12,7 @@ public class QuestionManager extends javax.swing.JFrame {
      * Creates new form QuestionManager
      */
     public QuestionManager() {
+    	getContentPane().setBackground(new Color(204, 255, 153));
         initComponents();
     }
 
@@ -19,9 +26,16 @@ public class QuestionManager extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel1.setBackground(new Color(204, 255, 153));
         jButton1 = new javax.swing.JButton();
+        jButton1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        jButton1.setBackground(new Color(153, 204, 153));
         jButton2 = new javax.swing.JButton();
+        jButton2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        jButton2.setBackground(new Color(153, 204, 153));
         jButton3 = new javax.swing.JButton();
+        jButton3.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        jButton3.setBackground(new Color(153, 204, 153));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Question Manager");
@@ -41,30 +55,42 @@ public class QuestionManager extends javax.swing.JFrame {
         });
 
         jButton3.setText("Update Question");
+        
+        btnBack = new JButton("Back");
+        btnBack.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        btnBack.setBackground(new Color(153, 204, 153));
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				backButtonActionPerformed(evt);
+			}
+		});
+        
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
-                .addContainerGap())
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(jButton1, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+        				.addComponent(jButton2, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+        				.addComponent(jButton3, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+        				.addComponent(btnBack))
+        			.addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+        	jPanel1Layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jPanel1Layout.createSequentialGroup()
+        			.addGap(38)
+        			.addComponent(jButton1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(jButton2, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(jButton3, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+        			.addComponent(btnBack))
         );
+        jPanel1.setLayout(jPanel1Layout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,6 +124,12 @@ public class QuestionManager extends javax.swing.JFrame {
         DeletingQuestion dq = new DeletingQuestion(); 
         dq.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+		this.setVisible(false);
+		MainPage2 mp  = new MainPage2(true);
+		mp.setVisible(true);
+	}
 
     /**
      * @param args the command line arguments
@@ -139,5 +171,6 @@ public class QuestionManager extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
+    private JButton btnBack;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,7 +1,5 @@
 package controller;
-
 import java.net.URISyntaxException;
-
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -131,7 +129,11 @@ public class Controller{
 						}
 						break;
 					case ESCAPE: // exit program
-						
+						state = GameState.Finished;
+						start = true;
+						resume();
+						board.reset();	
+						state = GameState.Started;
 						MainPage mp = new MainPage(false); 
 						mp.setVisible(true);
 						break;
@@ -163,8 +165,8 @@ public class Controller{
 			// move head in X-axis
 			head.setX(head.getX()+(dx*GameObject.SIZE));
 			
-			// check if head didn't go beyond screen(>WIDTH or <0), if yes set it on the other side
-			if(head.getX() > MainView.WIDTH || head.getX() < 0 || head.getY() > MainView.HEIGHT || head.getY() < 0) {
+			// check if head didn't go beyond screen(>WIDTH or <0), if yes set snake position to center 
+			if(head.getX() > MainView.WIDTH || head.getX() < 0 || head.getY() > MainView.HEIGHT-10 || head.getY() < 0) {
 				board.getSnake().setSnakePosition();
 				if(board.updateLife() == GameState.Finished) { // check if a collision occurred
 					state = GameState.Finished;
@@ -172,24 +174,7 @@ public class Controller{
 			}
 				// move head in Y-axis
 				head.setY(head.getY()+(dy*GameObject.SIZE));
-				
-			
-//			else if(head.getX() < 0) {
-//				head.setX(MainView.WIDTH - GameObject.SIZE/2);
-//			}
-//			
-//
-//			// check if head didn't go beyond screen(>HEIGHT or <0), if yes set it on the other side
-//			if(head.getY() > MainView.HEIGHT) {
-//				// for 2 points next to ScoreView panel
-//				if((head.getX() == GameObject.SIZE/2 || head.getX() == MainView.HEIGHT - GameObject.SIZE/2) && head.getY() == MainView.HEIGHT + GameObject.SIZE/2);
-//				else
-//					head.setY(GameObject.SIZE/2);
-//			}
-//			else if(head.getY() < 0) {
-//				head.setY(MainView.HEIGHT - GameObject.SIZE/2);
-//			}
-//					
+		
 			// moving the snake's body, each point gets the position of the one in front
 			for(int i = 1; i < snake.getSize(); ++i) {
 
@@ -206,7 +191,7 @@ public class Controller{
 
 
 	/**
-	 * The gameloop, handles user input, updates and renders the game
+	 * The game loop, handles user input, updates and renders the game
 	 */
 	private void resume(){
 		
@@ -320,13 +305,6 @@ public class Controller{
 		}
 		setSound(); // updating the sound
 		
-//		// setting snake speed due to gathered points
-//		if(speedConstraint > 2 && board.getScore() >= speedPointsConstraint)
-//			speedConstraint = 2; 		   //snake will move faster
-//		if((speedConstraint == 2) && (board.getScore() - speedPointsConstraint) >= 10) {
-//			speedPointsConstraint += 30;  // next interval 30 points further
-//			speedConstraint = 3; 	   	  // back to original speed
-//		}
 	}
 	
 	/**
@@ -353,6 +331,7 @@ public class Controller{
 //		speedPointsConstraint = 1;
 	}
 	
+	/// --------------------- SETTERS AND GETTERS 
 	/**
 	 * Static method for returning the actual state of game for the Model and View classes
 	 * @return Actual state of the game
@@ -360,10 +339,6 @@ public class Controller{
 	public static GameState getState() {
 		return state;
 	}	
-	
-
-	/// --------------------- SETTERS AND GETTERS 
-
 	
 	/**
 	 * Returns the stage, pass it to Main class
@@ -512,9 +487,5 @@ public class Controller{
 	public static void setState(GameState state) {
 		Controller.state = state;
 	}
-	
-	
-	
-	
 	
 }

@@ -17,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.*;
 
@@ -63,13 +64,10 @@ public class MainView{
 	private ArrayList<Question> hardQuestions;
 
 
-
-
-	
 	/**
 	 * Object that holds the super fruit by board class
 	 */
-	private SuperFruit sFruit;
+//	private SuperFruit sFruit;
 	/**
 	 * Array of obstacles passed by board class
 	 */
@@ -98,17 +96,14 @@ public class MainView{
 		hardQuestions=board.getHardQ();
 		
 		
-		sFruit = board.getSuperFruit();
+//		sFruit = board.getSuperFruit();
 		obstacles = board.getObstacles();
 		
 		stage = new Stage();
-		stage.setTitle("Snake");
-		
+		stage.setTitle("Snake");	
 		canvas = new Pane();
-	  canvas.setStyle("-fx-background-color: "+SCENE_COLOR);
-		
-		canvas.setStyle(" -fx-background-image: url(/icon/test.png)");
-	
+	    canvas.setStyle("-fx-background-color: "+SCENE_COLOR);
+		canvas.setStyle(" -fx-background-image: url(/icon/startBackground.jpg)");
         canvas.setPrefSize(WIDTH,HEIGHT);
      
         
@@ -116,8 +111,8 @@ public class MainView{
 		grid = new GridPane();
 		
 	    g = new Group();
-		scene = new Scene(g, WIDTH, HEIGHT + ScoreView.SCORE_HEIGHT);
-	//	scene.setFill(Color.web(SCENE_COLOR));
+		scene = new Scene(g, WIDTH-10, HEIGHT + ScoreView.SCORE_HEIGHT-10);
+		//scene.setFill(Color.web(SCENE_COLOR));
 		//+++++++++++
 		Image img = new Image("/icon/startBackground.jpg");
 		scene.setFill(new ImagePattern(img));
@@ -172,12 +167,13 @@ public class MainView{
 	private void whenStarted() {
 		
 		g = new Group();
+		Button menu = new Button();
 		Text largeText = new Text(WIDTH/2 - 170, HEIGHT/2 - 30, "Snake Game");
 		largeText.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 50));
 		Text smallText = new Text(WIDTH/2 - 130, HEIGHT/2 + 20 , "Press ENTER to play");
 		smallText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.ITALIC, 25));
 		smallText.setFill(Color.DARKGREEN);
-		g.getChildren().addAll(smallText, largeText);
+		g.getChildren().addAll(smallText, largeText,menu);
 		scene.setRoot(g);
 		stage.setScene(scene);
 	}
@@ -190,20 +186,16 @@ public class MainView{
 		grid.getChildren().clear(); // clear grid	
 		canvas.getChildren().clear(); // clear canvas  
 		stack = board.getScoreView().getStack(); // get the graphic panel created for score
-		sFruit = board.getSuperFruit(); // get the super fruit, to display if not null
+//		sFruit = board.getSuperFruit(); // get the super fruit, to display if not null
 		
 		int helpX, helpY, snakeY, snakeX; // variables for loops
 		
 		// snake's head to canvas +++++ eza bdna nzed kober lcirilerfnpa
 		Circle c = new Circle(snake.getHead().getX() , snake.getHead().getY(), GameObject.SIZE/2); 
-		c.setFill(BodyPart.HEAD_COLOR);
+		c.setFill(SnakeView.HEAD_COLOR);
 		canvas.getChildren().add(c);
 		
-		// if snake is in super state set the right color
-		if(board.getSuperState()) 
-			bodyColor = BodyPart.SUPER_BODY_COLOR;
-		else 
-			bodyColor = BodyPart.BODY_COLOR;
+		bodyColor = SnakeView.BODY_COLOR;
 		
 		// snake's body to canvas
 		for(int i = 1; i < snake.getSize(); ++i) {
@@ -254,7 +246,7 @@ public class MainView{
 		for(int i = 0; i < easyQuestions.size(); ++i) {
 			helpX = easyQuestions.get(i).getX();
 			helpY = easyQuestions.get(i).getY();
-			c = new Circle(helpX , helpY, GameObject.SIZE*2/3); 
+			c = new Circle(helpX , helpY, GameObject.SIZE/2); 
 			
 			Image img = new Image("/icon/easyQ.png");
 			c.setFill(new ImagePattern(img));
@@ -267,7 +259,7 @@ public class MainView{
 		for(int i = 0; i < mediumQuestions.size(); ++i) {
 			helpX = mediumQuestions.get(i).getX();
 			helpY = mediumQuestions.get(i).getY();
-			c = new Circle(helpX , helpY, GameObject.SIZE*2/3); 
+			c = new Circle(helpX , helpY, GameObject.SIZE/2); 
 			
 			Image img = new Image("/icon/mediumQ.png");
 			c.setFill(new ImagePattern(img));
@@ -280,37 +272,32 @@ public class MainView{
 				for(int i = 0; i < hardQuestions.size(); ++i) {
 					helpX = hardQuestions.get(i).getX();
 					helpY = hardQuestions.get(i).getY();
-					c = new Circle(helpX , helpY, GameObject.SIZE*2/3); 
+					c = new Circle(helpX , helpY, GameObject.SIZE/2); 
 					
 					Image img = new Image("/icon/hardQ.png");
 					c.setFill(new ImagePattern(img));
 					
+			
 					canvas.getChildren().add(c);
 					
 				}
-		
-		
-		
-		
-		
 	
-		
 		
 		// loading obstacles to canvas
 		for(int i = 0; i < obstacles.size(); ++i) {
 			helpX = obstacles.get(i).getX();
 			helpY = obstacles.get(i).getY();
 			Rectangle r = new Rectangle(helpX - (GameObject.SIZE/2) , helpY - (GameObject.SIZE/2) , GameObject.SIZE, GameObject.SIZE); 
-			r.setFill(Obstacle.OBSTACLE_COLOR);
+			r.setFill(ObstacleView.OBSTACLE_COLOR);
 			canvas.getChildren().add(r);
 		}
 		
-		// loading the super fruit to canvas
-				if(sFruit != null) {			
-					c = new Circle(sFruit.getX() , sFruit.getY(), GameObject.SIZE/2); 
-					c.setFill(SuperFruit.SUPER_FRUIT_COLOR);
-					canvas.getChildren().add(c);
-				}
+//		// loading the super fruit to canvas
+//				if(sFruit != null) {			
+//					c = new Circle(sFruit.getX() , sFruit.getY(), GameObject.SIZE/2); 
+//					c.setFill(SuperFruit.SUPER_FRUIT_COLOR);
+//					canvas.getChildren().add(c);
+//				}
 		
 	   // adding canvas that holds the game objects, and stack that holds the score display, together
 		grid.add(stack, 0, 1);
@@ -326,31 +313,41 @@ public class MainView{
 	private void whenPaused() {
 		
 		g = new Group();
-		Circle c1, c2;
-		Rectangle r;
-		Text largeText, smallText, t1, t2, t3, t4;
 		
-		largeText = new Text(WIDTH/2 - 190, HEIGHT/2 - 30, "Game Paused");
+		Text largeText, smallText, t1, t2, t3, t4,t22,t5,t6,t7,t55,t66,t77;
+		
+		largeText = new Text(WIDTH/2 - 190, 50, "Game Paused");
 		largeText.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 50));
-		smallText = new Text(WIDTH/2 - 190, HEIGHT/2 + 30, "Press SPACE to resume");
+		smallText = new Text(WIDTH/2 - 190, 80, "Press SPACE to resume");
 		smallText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 30));
 		smallText.setFill(Color.DARKGREEN);
 		
-		c1 = new Circle(WIDTH/2 - 200, HEIGHT/2 + 150, GameObject.SIZE/2);
-		c2 = new Circle(WIDTH/2 - 200, HEIGHT/2 + 190, GameObject.SIZE/2);
-		r = new Rectangle(WIDTH/2 - 210, HEIGHT/2 + 220, GameObject.SIZE, GameObject.SIZE);
-		r.setFill(Obstacle.OBSTACLE_COLOR);
 		
-		t1 = new Text(WIDTH/2 - 180, HEIGHT/2 + 154, "- normal fruit for 1 point");
+		t1 = new Text(WIDTH/2 - 250, HEIGHT/2 -200, "- apple gives 10 points");
 		t1.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));	
-		t2 = new Text(WIDTH/2 - 180, HEIGHT/2 + 194, "- super fruit gives 3 points and puts Snake into super state");
-		t2.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));				
-		t3 = new Text(WIDTH/2 - 180, HEIGHT/2 + 234, "- obstacle, hitting it ends game");
+		t2 = new Text(WIDTH/2 - 250, HEIGHT/2 - 150, "- banana gives 15 points");
+		t2.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));
+		t22 = new Text(WIDTH/2 - 250, HEIGHT/2 -100, "- pear gives 20 points");
+		t22.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));
+		t5 = new Text(WIDTH/2 - 250, HEIGHT/2 , "- red queastion gives 3 points for correct answer");
+		t5.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));
+		t55 = new Text(WIDTH/2 - 250, HEIGHT/2 + 50, "- red queastion decreases 30 points for wrong answer");
+		t55.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));
+		t6 = new Text(WIDTH/2 - 250, HEIGHT/2 + 100, "- white queastion gives 1 points for correct answer");
+		t6.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));
+		t66 = new Text(WIDTH/2 - 250, HEIGHT/2 + 150, "- white queastion decreases 10 points for wrong answer");
+		t66.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));
+		t7 = new Text(WIDTH/2 - 250, HEIGHT/2 +200, "- yellow queastion gives 2 points for correct answer");
+		t7.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));
+		t77 = new Text(WIDTH/2 - 250, HEIGHT/2 +250, "- yellow queastion decreases 20 points for wrong answer");
+		t77.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));
+
+		t3 = new Text(WIDTH/2 - 250, 250, "- inner walls or surrounding game board, hitting them decreases life");
 		t3.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));
-		t4 = new Text(WIDTH/2 - 270, HEIGHT/2 + 270, "Super state - normal fruits give 2 points and snake is immune to obstacles");
+		t4 = new Text(WIDTH/2 - 250, HEIGHT/2 + 270, "");
 		t4.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 13));		
 		
-		g.getChildren().addAll(smallText, largeText, c1, c2, r, t1, t2, t3, t4);
+		g.getChildren().addAll(smallText, largeText,t1,t2,t22,t3,t4,t5,t55,t6,t66,t7,t77);
 		scene.setRoot(g);
 		stage.setScene(scene);
 	}
@@ -361,10 +358,10 @@ public class MainView{
 	private void whenFinished() {
 		
 		g = new Group();
-		Text largeText = new Text(WIDTH/2 - 220, HEIGHT/2 - 60, "Game Over");
+		Text largeText = new Text(WIDTH/2 - 220, HEIGHT/2 - 80, "Game Over");
 		largeText.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 70));
 		largeText.setFill(Color.RED);
-		Text largeText2 = new Text(WIDTH/2 - 170, HEIGHT/2 + 20, "FINAL SCORE: " + board.getHighScore());
+		Text largeText2 = new Text(WIDTH/2 - 170, HEIGHT/2 - 20, "FINAL SCORE: " + board.getHighScore());
 		largeText2.setFont(Font.font("verdana", FontWeight.EXTRA_BOLD, FontPosture.REGULAR, 37));
 		Text smallText = new Text(WIDTH/2 - 160, HEIGHT/2 +100, "Press ENTER to replay");
 		smallText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.ITALIC, 25));

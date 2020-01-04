@@ -2,31 +2,56 @@ package model;
 
 import java.util.ArrayList;
 
+import utils.Constants;
 import utils.E_Level;
 
 public class Question {
-	private String questionNumber;
+	private String question;
 	private ArrayList<String> answers;
 	private int IndexOfCorrectAnswer;
 	private E_Level level;
 	private int pointAdded;
+	private int pointDecreaced;
+
 	private int X, Y;
 
-	public Question(String questionNumber, ArrayList<String> answers, int indexOfCorrectAnswer, E_Level level) {
+	public Question(String question, ArrayList<String> answers, int indexOfCorrectAnswer, E_Level level) {
 		super();
-		this.questionNumber = questionNumber;
+		this.question = question;
 		this.answers = answers;
 		IndexOfCorrectAnswer = indexOfCorrectAnswer;
 		this.level = level;
+		switch (level) {
+		case EASY:
+			pointAdded = Constants.pointsAddedEasyQ;
+			pointDecreaced = Constants.pointsDecreacedEasyQ;
+			break;
+		case MEDIUM:
+			pointAdded = Constants.pointsAddedMediumQ;
+			pointDecreaced = Constants.pointsDecreacedMediumQ;
+			break;
+		case HARD:
+			pointAdded = Constants.pointsAddedHardQ;
+			pointDecreaced = Constants.pointsDecreacedHardQ;
+			break;
+		}
 
 	}
 
-	public String getQuestionNumber() {
-		return questionNumber;
+	public int getPointDecreaced() {
+		return pointDecreaced;
 	}
 
-	public void setQuestionNumber(String questionNumber) {
-		this.questionNumber = questionNumber;
+	public void setPointDecreaced(int pointDecreaced) {
+		this.pointDecreaced = pointDecreaced;
+	}
+
+	public String getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
 	}
 
 	public ArrayList<String> getAnswers() {
@@ -79,7 +104,7 @@ public class Question {
 
 	@Override
 	public String toString() {
-		return "Question [questionNumber=" + questionNumber + ", answers=" + answers + ", IndexOfCorrectAnswer="
+		return "Question [question=" + question + ", answers=" + answers + ", IndexOfCorrectAnswer="
 				+ IndexOfCorrectAnswer + ", level=" + level + "]";
 	}
 

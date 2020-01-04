@@ -28,28 +28,28 @@ public class ScoreView {
 		
 		stack = new StackPane();
 		stack.setStyle("-fx-background-color: "+MainView.SCENE_COLOR);
-		Rectangle r = new Rectangle(MainView.WIDTH - (2*SCORE_HEIGHT), SCORE_HEIGHT);
+		Rectangle r = new Rectangle(MainView.WIDTH, SCORE_HEIGHT);
 	    r.setFill(scoreFieldColor);
 	    
 	    // triangles on the sides
-	    double x = (double)MainView.WIDTH;
-	    double y = (double)SCORE_HEIGHT;
-	    double z = (double)MainView.HEIGHT;
-	    
-	    Polygon t1 = new Polygon();
-        t1.getPoints().addAll(new Double[]{
-            0.0, y+z,
-            y, y+z,
-            y, z });
-        
-        Polygon t2 = new Polygon();
-        t2.getPoints().addAll(new Double[]{
-            x, y+z,
-            x-y, y+z,
-            x-y, z });
-	    
-	    t1.setFill(scoreFieldColor);
-	    t2.setFill(scoreFieldColor);
+//	    double x = (double)MainView.WIDTH;
+//	    double y = (double)SCORE_HEIGHT;
+//	    double z = (double)MainView.HEIGHT;
+//	    
+//	    Polygon t1 = new Polygon();
+//        t1.getPoints().addAll(new Double[]{
+//            0.0, y+z,
+//            y, y+z,
+//            y, z });
+//        
+//        Polygon t2 = new Polygon();
+//        t2.getPoints().addAll(new Double[]{
+//            x, y+z,
+//            x-y, y+z,
+//            x-y, z });
+//	    
+//	    t1.setFill(scoreFieldColor);
+//	    t2.setFill(scoreFieldColor);
         
 	    // setting the labels
 		l1 = new Label("SCORE: ");
@@ -77,17 +77,19 @@ public class ScoreView {
 		l4.setFont(new Font(13));
 		l4.setTextFill(scoreColor);
 		
-		stack.getChildren().addAll(r, t1, t2, l1, l2, l3, l4,l5,l6);		
-		stack.getChildren().get(1).setTranslateX(-(r.getWidth()/2+SCORE_HEIGHT/2));
-		stack.getChildren().get(2).setTranslateX(r.getWidth()/2+SCORE_HEIGHT/2);
-		stack.getChildren().get(3).setTranslateX(-100);
-		stack.getChildren().get(4).setTranslateX(-50);
-		stack.getChildren().get(7).setTranslateX(75);
-		stack.getChildren().get(8).setTranslateX(125);
-		stack.getChildren().get(5).setTranslateX(200);		
-		stack.getChildren().get(5).setTranslateY(15);		
-		stack.getChildren().get(6).setTranslateX(-200);		
-		stack.getChildren().get(6).setTranslateY(15);
+		//stack.getChildren().addAll(r, t1, t2, l1, l2, l3, l4,l5,l6);
+		stack.getChildren().addAll(r, l1, l2, l3, l4,l5,l6);		
+
+//		stack.getChildren().get(1).setTranslateX(-(r.getWidth()/2+SCORE_HEIGHT/2));
+//		stack.getChildren().get(2).setTranslateX(r.getWidth()/2+SCORE_HEIGHT/2);
+		stack.getChildren().get(1).setTranslateX(-100);
+		stack.getChildren().get(2).setTranslateX(-30);
+		stack.getChildren().get(5).setTranslateX(75);
+		stack.getChildren().get(6).setTranslateX(125);
+		stack.getChildren().get(3).setTranslateX(200);		
+		stack.getChildren().get(3).setTranslateY(15);		
+		stack.getChildren().get(4).setTranslateX(-200);		
+		stack.getChildren().get(4).setTranslateY(15);
 	}
 	
 	/**

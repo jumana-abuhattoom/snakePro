@@ -1,6 +1,4 @@
 package model;
-
-import javafx.scene.paint.Color;
 import utils.Constants;
 
 public class Banana extends Fruit{

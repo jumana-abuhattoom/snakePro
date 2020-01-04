@@ -3,12 +3,34 @@ package view;
 import javax.swing.JOptionPane;
 import controller.sysdata;
 
-public class MainPage extends javax.swing.JFrame {
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import java.awt.Component;
+
+public class MainPage extends JFrame {
 
 	/**
 	 * Creates new form MainPage
 	 */
 	public MainPage(boolean isAdmin) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(646, 661);
+		// this.setPreferredSize(new Dimension(900, 900));
+		// setBackground(new Color(153, 204, 153));
+		// getContentPane().setBackground(new Color(204, 255, 153));
+
 		initComponents();
 		if (isAdmin)
 			manageQ_btn.setVisible(true);
@@ -25,10 +47,6 @@ public class MainPage extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated
 	// Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
-		jPanel1 = new javax.swing.JPanel();
-		startGame_btn = new javax.swing.JButton();
-		showHistory_btn = new javax.swing.JButton();
-		manageQ_btn = new javax.swing.JButton();
 		jMenuBar1 = new javax.swing.JMenuBar();
 		jMenu1 = new javax.swing.JMenu();
 		jMenuItem3 = new javax.swing.JMenuItem();
@@ -39,7 +57,38 @@ public class MainPage extends javax.swing.JFrame {
 		jMenuItem4 = new javax.swing.JMenuItem();
 		jMenuItem5 = new javax.swing.JMenuItem();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		backgroundlabel = new JLabel("");
+		backgroundlabel.setBounds(0, 0, 646, 661);
+		backgroundlabel.setIcon(new ImageIcon(MainPage.class.getResource("/icon/background.jpg")));
+		// backgroundlabel.setSize(700, 700);
+
+		setVisible(true);
+		getContentPane().setLayout(null);
+
+		buttonsPanel = new javax.swing.JPanel();
+		buttonsPanel.setBackground(new Color(0, 0, 0, 80));
+
+	    startGame_btn = new javax.swing.JButton();
+		startGame_btn.setBounds(139, 31, 380, 47);
+		startGame_btn.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		startGame_btn.setBackground(new Color(153, 204, 153));
+
+		showHistory_btn = new javax.swing.JButton();
+		showHistory_btn.setBounds(139, 104, 380, 47);
+		showHistory_btn.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		showHistory_btn.setBackground(new Color(153, 204, 153));
+
+		manageQ_btn = new javax.swing.JButton();
+		manageQ_btn.setBounds(139, 178, 380, 47);
+		manageQ_btn.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		manageQ_btn.setBackground(new Color(153, 204, 153));
+
+		buttonsPanel.setLayout(null);
+		buttonsPanel.add(startGame_btn);
+		buttonsPanel.add(showHistory_btn);
+		buttonsPanel.add(manageQ_btn);
+		backgroundlabel.add(buttonsPanel);
+		getContentPane().add(backgroundlabel);
 
 		startGame_btn.setText("START GAME");
 		startGame_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -57,29 +106,31 @@ public class MainPage extends javax.swing.JFrame {
 			}
 		});
 
-		javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-		jPanel1.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-						.addContainerGap()
-						.addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-								.addComponent(manageQ_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-								.addComponent(showHistory_btn, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(startGame_btn, javax.swing.GroupLayout.DEFAULT_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addContainerGap()));
-		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(jPanel1Layout.createSequentialGroup().addContainerGap()
-						.addComponent(startGame_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(18, 18, 18)
-						.addComponent(showHistory_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 43,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addGap(18, 18, 18)
-						.addComponent(manageQ_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 41,
-								javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		// javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+		// jPanel1.setLayout(jPanel1Layout);
+		// jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		// .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+		// jPanel1Layout.createSequentialGroup()
+		// .addContainerGap()
+		// .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+		// .addComponent(manageQ_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 360,
+		// Short.MAX_VALUE)
+		// .addComponent(showHistory_btn, javax.swing.GroupLayout.DEFAULT_SIZE,
+		// javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+		// .addComponent(startGame_btn, javax.swing.GroupLayout.DEFAULT_SIZE,
+		// javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		// .addContainerGap()));
+		// jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+		// .addGroup(jPanel1Layout.createSequentialGroup().addContainerGap()
+		// .addComponent(startGame_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 44,
+		// javax.swing.GroupLayout.PREFERRED_SIZE)
+		// .addGap(18, 18, 18)
+		// .addComponent(showHistory_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 43,
+		// javax.swing.GroupLayout.PREFERRED_SIZE)
+		// .addGap(18, 18, 18)
+		// .addComponent(manageQ_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 41,
+		// javax.swing.GroupLayout.PREFERRED_SIZE)
+		// .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
 		jMenu1.setText("File");
 
@@ -130,21 +181,32 @@ public class MainPage extends javax.swing.JFrame {
 
 		setJMenuBar(jMenuBar1);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup().addContainerGap().addComponent(jPanel1,
-						javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addContainerGap()));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-				javax.swing.GroupLayout.Alignment.TRAILING,
-				layout.createSequentialGroup().addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
-								javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()));
-
-		pack();
-		setLocationRelativeTo(null);
+		// javax.swing.GroupLayout layout = new
+		// javax.swing.GroupLayout(getContentPane());
+		// layout.setHorizontalGroup(
+		// layout.createParallelGroup(Alignment.TRAILING)
+		// .addGroup(layout.createSequentialGroup()
+		// .addContainerGap()
+		// .addGroup(layout.createParallelGroup(Alignment.LEADING)
+		// .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
+		// .addComponent(backgroundlabel, GroupLayout.PREFERRED_SIZE, 684,
+		// Short.MAX_VALUE))
+		// .addContainerGap())
+		// );
+		// layout.setVerticalGroup(
+		// layout.createParallelGroup(Alignment.LEADING)
+		// .addGroup(layout.createSequentialGroup()
+		// .addContainerGap()
+		// .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+		// GroupLayout.PREFERRED_SIZE)
+		// .addPreferredGap(ComponentPlacement.RELATED)
+		// .addComponent(backgroundlabel, GroupLayout.PREFERRED_SIZE, 447,
+		// Short.MAX_VALUE)
+		// .addGap(63))
+		// );
+		// getContentPane().setLayout(layout);
+		// pack();
+		// setLocationRelativeTo(null);
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -156,8 +218,6 @@ public class MainPage extends javax.swing.JFrame {
 
 	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		this.setVisible(false);
-		Login li = new Login();
-		li.setVisible(true);
 	}// GEN-LAST:event_jButton1ActionPerformed
 
 	private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -193,7 +253,8 @@ public class MainPage extends javax.swing.JFrame {
 	}// GEN-LAST:event_jMenuItem2ActionPerformed
 
 	/**
-	 * @param args the command line arguments
+	 * @param args
+	 *            the command line arguments
 	 */
 	public static void main(String args[]) {
 		/* Set the Nimbus look and feel */
@@ -230,10 +291,9 @@ public class MainPage extends javax.swing.JFrame {
 		});
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton startGame_btn;
-	private javax.swing.JButton showHistory_btn;
 	private javax.swing.JButton manageQ_btn;
+	private javax.swing.JButton showHistory_btn;
+	private javax.swing.JButton startGame_btn;
 	private javax.swing.JMenu jMenu1;
 	private javax.swing.JMenu jMenu2;
 	private javax.swing.JMenu jMenu3;
@@ -243,6 +303,6 @@ public class MainPage extends javax.swing.JFrame {
 	private javax.swing.JMenuItem jMenuItem3;
 	private javax.swing.JMenuItem jMenuItem4;
 	private javax.swing.JMenuItem jMenuItem5;
-	private javax.swing.JPanel jPanel1;
-	// End of variables declaration//GEN-END:variables
+	private JLabel backgroundlabel;
+	private JPanel buttonsPanel;
 }

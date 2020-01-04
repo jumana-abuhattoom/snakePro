@@ -27,16 +27,10 @@ public class Obstacle{
 	public void setY(int y) {
 		Y = y;
 	}
-	/**
-	 * Color of obstacles
-	 */
-	public static final Color OBSTACLE_COLOR = Color.BROWN;
+
 	
 	/**
 	 * How many obstacles from beginning
 	 */
-	public final static int OBSTACLES_START_NUMBER = 3;
-	
-	
-
+	public final static int OBSTACLES_START_NUMBER = 15;
 }
