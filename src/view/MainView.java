@@ -30,7 +30,7 @@ public class MainView{
 	 * Height of the game board
 	 */
 	public final static int HEIGHT = 600;
-	/**
+	/** 
 	 * Color of the scene
 	 */
 	public final static String SCENE_COLOR = "white";
