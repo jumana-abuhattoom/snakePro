@@ -2,7 +2,6 @@ package controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import view.MainPage;
 import view.MainPage2;
 
 /**
@@ -14,8 +13,6 @@ public class MainClass extends Application {
 		importFromJson jsc = new importFromJson();
 		jsc.getQuestionFromJson();
 
-
-	
 		 // Controller object, default constructor sets up basic game parameters and the View and Model together
 		 Controller setUpGame = new Controller();
 		 // Getting the game stage from controller, which got it from MainView class
@@ -26,7 +23,7 @@ public class MainClass extends Application {
 		 primaryStage.show();
 			MainPage2 mp = new MainPage2(true);
 		mp.show(true);
-//notee
+
 	}
 
 	public static void main(String args[]) {

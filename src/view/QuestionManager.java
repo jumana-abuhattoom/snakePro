@@ -55,7 +55,12 @@ public class QuestionManager extends javax.swing.JFrame {
         });
 
         jButton3.setText("Update Question");
-        
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateBtnActionPerformed(evt);
+            }
+        });
+
         btnBack = new JButton("Back");
         btnBack.setFont(new Font("Tahoma", Font.PLAIN, 16));
         btnBack.setBackground(new Color(153, 204, 153));
@@ -129,6 +134,11 @@ public class QuestionManager extends javax.swing.JFrame {
 		this.setVisible(false);
 		MainPage2 mp  = new MainPage2(true);
 		mp.setVisible(true);
+	}
+    private void updateBtnActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+		this.setVisible(false);
+		UpdateQView up  = new UpdateQView();
+		up.setVisible(true);
 	}
 
     /**
