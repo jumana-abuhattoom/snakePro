@@ -26,7 +26,7 @@ public class MainClass extends Application {
 		 primaryStage.show();
 			MainPage2 mp = new MainPage2(true);
 		mp.show(true);
-
+//notee
 	}
 
 	public static void main(String args[]) {
