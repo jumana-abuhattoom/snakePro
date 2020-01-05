@@ -2,11 +2,60 @@ package view;
 
 import javax.swing.*;
 
+import controller.sysdata;
+
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 
 public class MainPage2 extends JFrame {
 
 	public MainPage2(boolean isAdmin) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				
+				
+				int result = JOptionPane.showConfirmDialog(
+						getContentPane(),
+					    "you sure you want to exit ?",
+					    " ",
+					    JOptionPane.YES_NO_OPTION);
+				if(result==JOptionPane.YES_NO_OPTION){
+					 try{
+					      
+					      OutputStream fileToSave = new FileOutputStream("Game.ser");
+					      OutputStream bufferout = new BufferedOutputStream(fileToSave);
+					      ObjectOutput output = new ObjectOutputStream(bufferout);
+					      sysdata ish = sysdata.getInstance();
+					      try{
+					        output.writeObject(ish);
+					    	JOptionPane.showMessageDialog(getContentPane(),
+								    "The Changes saved   ",
+								    "saved massege",
+								    JOptionPane.PLAIN_MESSAGE);
+					      }
+					      finally{
+					        output.close();
+					      }
+					    }  
+					    catch(IOException ex){
+					    	JOptionPane.showMessageDialog(getContentPane(),
+								    "Error , the changes were not saved ",
+								    "saved massege",
+								    JOptionPane.ERROR_MESSAGE);
+					      	
+				}
+					
+				}
+			}
+		});
 		setBounds(new Rectangle(0, 0, 700, 730));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -62,7 +111,8 @@ public class MainPage2 extends JFrame {
 
 	private void showHistoryActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		this.setVisible(false);
-		History his = new History();
+		
+		History his = new History(null);
 		his.setVisible(true);
 	}
 

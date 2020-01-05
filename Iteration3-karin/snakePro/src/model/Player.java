@@ -1,13 +1,19 @@
 package model;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static int counter=0;
 	public int ID;
     public String name; 
     public String password; 
     public int highscore; 
 
-    public Player(String name, String password) {
+    public Player(String name, String password)  {
 		super();
      	++counter;
      	this.ID=counter;

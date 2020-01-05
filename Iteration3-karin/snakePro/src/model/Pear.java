@@ -1,10 +1,16 @@
 package model;
 
+import java.io.Serializable;
+
 import javafx.scene.paint.Color;
 import utils.Constants;
 
-public class Pear extends Fruit{
+public class Pear extends Fruit  implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int SIZE = 20;
 	protected int X, Y;
 

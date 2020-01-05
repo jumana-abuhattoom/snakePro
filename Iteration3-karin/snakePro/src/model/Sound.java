@@ -1,12 +1,17 @@
 package model;
 
+import java.io.Serializable;
 import java.net.URISyntaxException;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 
-public class Sound {
+public class Sound  implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Media sound;
 	private MediaPlayer audio;
 

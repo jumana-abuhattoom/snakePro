@@ -1,8 +1,4 @@
-/icon/
-/sound/
-/view/
-/automationTests/
-/controller/
 /model/
-/questions.json
 /utils/
+/view/
+/controller/

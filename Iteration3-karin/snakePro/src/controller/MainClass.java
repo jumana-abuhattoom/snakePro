@@ -1,5 +1,9 @@
 package controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import view.MainPage;
@@ -28,7 +32,8 @@ public class MainClass extends Application {
 		mp.show(true);
 
 	}
-
+	
+		
 	public static void main(String args[]) {
 		launch(args);
 	}

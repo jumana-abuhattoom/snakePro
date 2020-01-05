@@ -1,6 +1,12 @@
 package model;
 
-public  abstract class Fruit {
+import java.io.Serializable;
+
+public  abstract class Fruit  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public int appearAfterSec;
 	public int addedPoints;
 	public int addedLenght;

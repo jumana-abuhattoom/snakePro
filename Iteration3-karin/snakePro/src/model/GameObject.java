@@ -1,7 +1,13 @@
 package model;
 
-public abstract class GameObject {
+import java.io.Serializable;
 
+public abstract class GameObject  implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int SIZE = 20;
 	protected int X, Y;
 	

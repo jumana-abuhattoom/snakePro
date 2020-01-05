@@ -1,9 +1,15 @@
 package model;
 
+import java.io.Serializable;
+
 import utils.Constants;
 
-public class Mouse {
+public class Mouse implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public int appearAfterSec;
 	public int addedPoints;
 	public int addedLenght;

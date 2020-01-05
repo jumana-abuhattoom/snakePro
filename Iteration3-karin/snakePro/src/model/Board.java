@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.Serializable;
 import java.net.URISyntaxException;
 import javafx.scene.media.MediaPlayer;
 import controller.Controller;
@@ -11,7 +12,15 @@ import utils.E_Level;
 import view.MainView;
 import view.ScoreView;
 
-public class Board {
+public class Board  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * 
+	 */
+	
 	/**
 	 * Number of GameObjects to store in X-axis
 	 */

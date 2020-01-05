@@ -1,8 +1,14 @@
 package model;
+import java.io.Serializable;
+
 import utils.Constants;
 
-public class Banana extends Fruit{
+public class Banana extends Fruit implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int SIZE = 20;
 	protected int X, Y;
 

@@ -1,8 +1,14 @@
 package model;
 
+import java.io.Serializable;
+
 import javafx.scene.paint.Color;
 
-public class Obstacle{
+public class Obstacle implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final int SIZE = 20;
 	private int X, Y;
 	

@@ -1,12 +1,28 @@
 package view;
+import java.awt.Font;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
+import controller.sysdata;
+import model.Player;
 
 public class History extends javax.swing.JFrame {
+	private JTable table;
 
     /**
      * Creates new form History
      */
-    public History() {
-        initComponents();
+    public History(Player p) {
+//    	if(p==null) {
+//    		p=sysdata.getInstance().players.iterator().next();
+//    	}
+        initComponents(p);
+        
+        
     }
 
     /**
@@ -16,21 +32,87 @@ public class History extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
+    private void initComponents(Player p ) {
+    
+      
+			
+		
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+        
 
+       
+     
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
-
+    	String[] columnNames= new String[3];
+		Object[][] arrayOFlist = null;
+		 columnNames[0] = "Playe ID";
+	      columnNames[1]=  "player Name ";
+	      columnNames[2]= "player score";
+	      int i = 0;
+			
+			 Set<Player> PlayerSet=null;
+			try{
+				PlayerSet=sysdata.getInstance().players;
+				
+			
+				
+			 
+			 }
+			
+			catch(NullPointerException n){
+				PlayerSet = new  HashSet<Player>();
+			}
+			
+			arrayOFlist = new Object[PlayerSet.size() * 100][3];
+			if(p!=null) {
+			for (Player les : PlayerSet) {
+				
+			if( p.ID == les.getID()) {
+				arrayOFlist[i][0] = les.ID;
+				arrayOFlist[i][1] = les.name;
+				arrayOFlist[i][2] = les.highscore;
+				i++;
+			}
+			}
+			}else {
+				for (Player les : PlayerSet) {
+					
+					
+						arrayOFlist[i][0] = les.ID;
+						arrayOFlist[i][1] = les.name;
+						arrayOFlist[i][2] = les.highscore;
+						i++;
+					}
+					
+			}
+			
+		
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    //    getContentPane().setLayout(null);
+        
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(0, 45, 437, 313);
+       
+        
+        table = new JTable(arrayOFlist, columnNames);
+		scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(0, 45, 596, 378);
+		
+		getContentPane().add(scrollPane);
+       JLabel j = new JLabel("History Of The High Score ");
+       j.setBounds(100, 10, 500, 22);
+       j.setFont(new Font("Serif", Font.PLAIN, 16));
+       getContentPane().add(j);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -64,11 +146,8 @@ public class History extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new History().setVisible(true);
+                new History(null).setVisible(true);
             }
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    // End of variables declaration//GEN-END:variables
 }

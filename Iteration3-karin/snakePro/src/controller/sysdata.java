@@ -1,5 +1,9 @@
 package controller;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,7 +11,11 @@ import model.Player;
 import model.Question;
 import utils.E_Level;
 
-public class sysdata {
+public class sysdata  implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Players and questions
 	public Set<Player> players;
 	public Set<Question> questions;
@@ -15,14 +23,40 @@ public class sysdata {
 	private static sysdata instance;
 
 	private sysdata() {
+		
 		players = new HashSet<>();
 		questions = new HashSet<>();
+		
 	}
+public static boolean load(){
+		
+		FileInputStream fiellastesaved = null;
+		try {
+			fiellastesaved = new FileInputStream("Game.ser");
+			
+			ObjectInputStream IBuyesaved = new ObjectInputStream(fiellastesaved);
+			 instance = (sysdata) IBuyesaved.readObject();
+			
+		} catch (IOException | ClassNotFoundException e) {
+			return false;
+		} finally {
+			try {
+				if (fiellastesaved != null) {
+					fiellastesaved.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
+		}
 
 	// Singletone
 	public static sysdata getInstance() {
+		load();
 		if (instance == null) {
 			instance = new sysdata();
+			
 			return instance;
 		} else
 			return instance;

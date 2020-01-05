@@ -1,11 +1,16 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import utils.Constants;
 import utils.E_Level;
 
-public class Question {
+public class Question implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String question;
 	private ArrayList<String> answers;
 	private int IndexOfCorrectAnswer;
