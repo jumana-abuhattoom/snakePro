@@ -40,6 +40,7 @@ public static boolean load(){
 		} catch (IOException | ClassNotFoundException e) {
 			return false;
 		} finally {
+			System.out.println("11");
 			try {
 				if (fiellastesaved != null) {
 					fiellastesaved.close();
