@@ -130,11 +130,11 @@ public class Controller{
 						break;
 					case ESCAPE: // exit program
 						state = GameState.Finished;
-						start = true;
-						resume();
 						board.reset();	
 						state = GameState.Started;
-						MainPage mp = new MainPage(false); 
+						view.render();
+						setSound();						
+						MainPage mp = new MainPage(true); 
 						mp.setVisible(true);
 						break;
 					default:
@@ -148,6 +148,7 @@ public class Controller{
 	         public void handle(KeyEvent event) {
 			 }
 		});
+		
 	}
 	
 	
@@ -201,10 +202,6 @@ public class Controller{
 				@Override
 				public void handle(long now) {
 					
-					/*show fps
-					 updateFps();
-					 System.out.println("FPS: " + fpsCurrent);
-					*/
 					
 					// when moving up
 					if(up && !down) {
@@ -243,9 +240,9 @@ public class Controller{
 					// when game started or restarted
 					if(start && (state == GameState.Finished || state == GameState.Started)) {
 						restart();
+						setSound();
 						start = false;
 						board.updateFruit(); // updates the state of fruits
-
 					}
 					// when game finished
 					if(state == GameState.Finished) {
@@ -253,6 +250,7 @@ public class Controller{
 					}	
 					// when game is running, make movement
 					if(state == GameState.Running) {
+						setSound();
 						if(i==speedConstraint) { // control the speed of snake
 							move(dx, dy);
 							keyActive = true; // unlock possibility to press another key after snake made it's move
@@ -268,25 +266,7 @@ public class Controller{
 			}.start(); // starting the timer
 		
 	}
-/* shows fps
-	int frameCount = 0;
-	int fpsCurrent = 0;
-	long prevTime = -1;
-	private void updateFps() {
-	 
-	   frameCount++;
-	   
-	   long currTime = System.currentTimeMillis();
-	   
-	   if( currTime - prevTime >= 1000) {
-	    
-	    fpsCurrent = frameCount;
 
-	    prevTime = currTime;
-	    frameCount = 0;
-	   }
-	}
-*/
 	/**
 	 * The update method
 	 */
@@ -318,6 +298,8 @@ public class Controller{
 			audio.pause(); // pause music when game is paused
 		if(state == GameState.Finished)
 			audio.stop(); // stop the music when game is finished	
+		if(state == GameState.Started)
+			audio.stop();
 	}
 	
 	/**

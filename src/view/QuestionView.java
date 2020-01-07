@@ -14,18 +14,7 @@ import model.Question;
 public class QuestionView {
 
 	public static boolean showQuestions(Question q) {
-		// List<String> choices = new ArrayList<>();
-		// choices = q.getAnswers();
-
-		// Stage s= new Stage();
-		// // set title for the stage
-		// s.setTitle("creating choice dialog");
-		//
-		// // create a button
-		// Button b = new Button("click");
-		//
-		// // create a tile pane
-		// TilePane r = new TilePane();
+	
 
 		// items for the dialog
 		String Answers[] = new String[4];
@@ -51,13 +40,7 @@ public class QuestionView {
 			JOptionPane.showMessageDialog(null, "Sorry :( Wrong Answer!");
 			return false;
 		}
-		// String input = (String) JOptionPane.showInputDialog(null, q.getQuestion(),
-		// "The Choice of a Lifetime",
-		// JOptionPane.QUESTION_MESSAGE, null, // Use
-		// // default
-		// // icon
-		// Answers, // Array of choices
-		// Answers[1]); // Initial choice
+	
 
 	}
 }

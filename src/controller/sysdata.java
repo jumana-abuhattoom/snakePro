@@ -7,13 +7,15 @@ import model.Player;
 import model.Question;
 import utils.E_Level;
 
-public class sysdata {
+public class sysdata   {
+
 	// Players and questions
 	public Set<Player> players;
 	public Set<Question> questions;
 	// singletone's instance
 	private static sysdata instance;
 
+	
 	private sysdata() {
 		players = new HashSet<>();
 		questions = new HashSet<>();
@@ -27,6 +29,31 @@ public class sysdata {
 		} else
 			return instance;
 	}
+/////////
+//public static boolean load(){
+//		
+//		FileInputStream fiellastesaved = null;
+//		try {
+//			fiellastesaved = new FileInputStream("Game.ser");
+//			
+//			ObjectInputStream IBuyesaved = new ObjectInputStream(fiellastesaved);
+//			 instance = (sysdata) IBuyesaved.readObject();
+//			
+//		} catch (IOException | ClassNotFoundException e) {
+//			return false;
+//		} finally {
+//			System.out.println("11");
+//			try {
+//				if (fiellastesaved != null) {
+//					fiellastesaved.close();
+//				}
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		return true;
+//		}
+//////////////
 
 	// Adding new player
 	public boolean AddPlayer(String name, String password) {
@@ -80,21 +107,22 @@ public class sysdata {
 				return false;
 			}
 		}
-			if(this.questions.add(q)) {
-			for(Question qtest : questions) {
+		if (this.questions.add(q)) {
+			for (Question qtest : questions) {
 				System.out.println(qtest);
 			}
 			return true;
-			}
-			return false;
+		}
+		return false;
 	}
 
+	// update question
 	public boolean UpdateQuestion(String questionNumber, ArrayList<String> answers, int IndexOfCorrectAnswer,
 			int level) {
 		if (questionNumber == null || answers == null || IndexOfCorrectAnswer < 0 || IndexOfCorrectAnswer > 4
 				|| level < 1 || level > 3)
 			return false;
-		
+
 		Question q = new Question(questionNumber, answers, IndexOfCorrectAnswer, E_Level.getLevelbyNumber(level));
 
 		// if one of the answers is empty
@@ -115,36 +143,15 @@ public class sysdata {
 			if (qq.getQuestion().equals(questionNumber)) {
 				qq.setAnswers(q.getAnswers());
 				qq.setIndexOfCorrectAnswer(q.getIndexOfCorrectAnswer());
+				qq.setLevel(q.getLevel());
 				return true;
 			}
 		}
 
 		return false;
 	}
-	// --------------------------------------------------Helping methods for
-	// tests------------------------------------------------
 
-	public boolean CheckUsernameAndPassword(String User, String Pass) {
-		for (Player p : sysdata.getInstance().players) {
-			if (p.name.equals(User) && p.password.equals(Pass)) {
-				return true;
-			}
-		}
-		if (User == "Admin" && Pass == "admin11")
-			return true;
-		return false;
-	}
-
-	public boolean UpdatePlayerDetails(String prevUser, String PrevPass, String CurrentUser, String CurrentPass) {
-		sysdata.getInstance().DeletePlayer(prevUser, PrevPass);
-		if (sysdata.getInstance().AddPlayer(CurrentUser, CurrentPass)) {
-			return true;
-		} else {
-			sysdata.getInstance().AddPlayer(prevUser, PrevPass);
-			return false;
-		}
-	}
-
+	// delete Question
 	public boolean DeleteQuestion(String num) {
 		if (num == null)
 			return false;
@@ -156,7 +163,27 @@ public class sysdata {
 			}
 		}
 		return false;
+	}
+	// --------------------------------------------------Helping methods for
+	// tests------------------------------------------------
 
+	public boolean CheckUsernameAndPassword(String User, String Pass) {
+		for (Player p : sysdata.getInstance().players) {
+			if (p.name.equals(User) && p.password.equals(Pass)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean UpdatePlayerDetails(String prevUser, String PrevPass, String CurrentUser, String CurrentPass) {
+		sysdata.getInstance().DeletePlayer(prevUser, PrevPass);
+		if (sysdata.getInstance().AddPlayer(CurrentUser, CurrentPass)) {
+			return true;
+		} else {
+			sysdata.getInstance().AddPlayer(prevUser, PrevPass);
+			return false;
+		}
 	}
 
 }

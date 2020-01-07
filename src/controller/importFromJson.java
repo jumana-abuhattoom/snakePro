@@ -13,7 +13,6 @@ import utils.E_Level;
 
 public class importFromJson {
 
-	/// -------------------------------- JUMANA:
 	public void getQuestionFromJson() throws IOException {
 
 		InputStream in = getClass().getResourceAsStream("/questions.json");
@@ -93,11 +92,11 @@ public class importFromJson {
 		}
 	}
 
-	public static boolean updatequestiontojson(Question q) {
-		if (sysdata.getInstance().UpdateQuestion(q.getQuestion(), q.getAnswers(), q.getIndexOfCorrectAnswer(),
-				q.getLevel().getLevel())) {
-			JSONObject jsonObject1 = new JSONObject();
+	public static boolean updatequestiontojson(String question, ArrayList<String> answers, int IndexOfCorrectAnswer, int level) {
 
+		if (sysdata.getInstance().UpdateQuestion(question, answers, IndexOfCorrectAnswer,level)) {
+			JSONObject jsonObject1 = new JSONObject();
+		
 			// JSON object and values
 			JSONArray jsonArray1 = new JSONArray();
 			for (Question s : sysdata.getInstance().questions) {
@@ -134,9 +133,9 @@ public class importFromJson {
 		}
 	}
 
-	public static boolean reomveQuestiontojson(Question q) {
+	public static boolean reomveQuestiontojson(String q) {
 
-		if (sysdata.getInstance().DeleteQuestion(q.getQuestion())) {
+		if (sysdata.getInstance().DeleteQuestion(q)) {
 			JSONObject jsonObject1 = new JSONObject();
 
 			// JSON object and values

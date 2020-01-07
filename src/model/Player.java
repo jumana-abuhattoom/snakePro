@@ -1,6 +1,8 @@
 package model;
 
-public class Player {
+public class Player   {
+
+	
 	public static int counter=0;
 	public int ID;
     public String name; 
@@ -43,7 +45,9 @@ public class Player {
 	}
 
 	public void setHighscore(int highscore) {
+		if(highscore > this.highscore ) {
 		this.highscore = highscore;
+		}
 	}	
     
 }

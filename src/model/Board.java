@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.Serializable;
 import java.net.URISyntaxException;
 import javafx.scene.media.MediaPlayer;
 import controller.Controller;
@@ -11,7 +12,8 @@ import utils.E_Level;
 import view.MainView;
 import view.ScoreView;
 
-public class Board {
+public class Board  {
+
 	/**
 	 * Number of GameObjects to store in X-axis
 	 */
@@ -35,7 +37,7 @@ public class Board {
 	/**
 	 * Super fruit object
 	 */
-//	private SuperFruit sFruit;
+	// private SuperFruit sFruit;
 	/**
 	 * List of obstacles
 	 */
@@ -101,7 +103,7 @@ public class Board {
 		rand = new Random();
 		head = snake.getHead();
 		state = GameState.Started;
-//		sFruit = null;
+		// sFruit = null;
 		superState = false;
 		addObstacle = true;
 		// obstaclesNumber = Obstacle.OBSTACLES_START_NUMBER;
@@ -848,8 +850,6 @@ public class Board {
 		apples.remove(i);
 	}
 
-	// same for banaanaa++++++++
-
 	private void removeBanana(int i) {
 		bananas.remove(i);
 	}
@@ -898,7 +898,7 @@ public class Board {
 		snake.setStart();
 		obstacles.clear();
 		apples.clear();
-		// +++
+		pears.clear();
 		bananas.clear();
 		score = 0;
 		addObstacle = true;
@@ -947,7 +947,6 @@ public class Board {
 		return apples;
 	}
 
-	// +++++
 	public ArrayList<Banana> getBananas() {
 		return bananas;
 	}
@@ -967,15 +966,6 @@ public class Board {
 	public ArrayList<Question> getHardQ() {
 		return hardQ;
 	}
-
-	/**
-	 * Returns the super fruit
-	 * 
-	 * @return Super fruit object
-	 */
-//	public SuperFruit getSuperFruit() {
-//		return sFruit;
-//	}
 
 	/**
 	 * Returns obstacles

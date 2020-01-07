@@ -1,11 +1,12 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-
 import utils.Constants;
 import utils.E_Level;
 
-public class Question {
+public class Question  {
+	
 	private String question;
 	private ArrayList<String> answers;
 	private int IndexOfCorrectAnswer;

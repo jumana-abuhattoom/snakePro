@@ -1,8 +1,11 @@
 package model;
 
+import java.io.Serializable;
+
 import utils.Constants;
 
-public class Mouse {
+public class Mouse  {
+
 
 	public int appearAfterSec;
 	public int addedPoints;

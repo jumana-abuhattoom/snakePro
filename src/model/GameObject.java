@@ -1,6 +1,8 @@
 package model;
 
-public abstract class GameObject {
+import java.io.Serializable;
+
+public abstract class GameObject  {
 
 	public static final int SIZE = 20;
 	protected int X, Y;

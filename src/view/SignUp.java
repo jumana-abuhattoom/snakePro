@@ -2,20 +2,20 @@ package view;
 
 import javax.swing.*;
 
+import controller.sysdata;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginAdmin extends JFrame {
+public class SignUp extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-
-	public LoginAdmin() {
+	public SignUp() {
 		setBounds(new Rectangle(0, 0, 700, 730));
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		Toolkit toolK = getToolkit();
 		Dimension size = toolK.getScreenSize();
-		setLocation(size.width / 2 - getWidth() / 2, size.height / 2 - getHeight() / 2);
+		setLocation(size.width/2-getWidth()/2, size.height/2-getHeight()/2);
 		getContentPane().setLayout(null);
 
 		JLabel label = new JLabel("");
@@ -24,55 +24,52 @@ public class LoginAdmin extends JFrame {
 		label.setLayout(null);
 		getContentPane().add(label);
 
-		// label
-		JLabel qLabel = new JLabel("Login As Admin To Manage Questions");
-		qLabel.setFont(new Font("Tahoma", Font.BOLD, 25));
-		qLabel.setBounds(70, 30, 600, 47);
-		label.add(qLabel);
-
 		// user name
-		JLabel userName = new JLabel("User Name");
+		JLabel userName = new JLabel("Select User Name");
 		userName.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		userName.setBounds(50, 100, 80, 47);
+		userName.setBounds(139, 20, 380, 47);
 		label.add(userName);
 
 		JTextField userNameTxt = new JTextField();
-		userNameTxt.setBounds(139, 100, 380, 47);
+		userNameTxt.setBounds(139, 50, 380, 47);
 		userNameTxt.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		label.add(userNameTxt);
 
 		// password
-		JLabel password = new JLabel("Password");
+		JLabel password = new JLabel("Select Password");
 		password.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		password.setBounds(50, 170, 80, 47);
+		password.setBounds(139, 100, 380, 47);
 		label.add(password);
 
 		JPasswordField passwordTxt = new JPasswordField();
-		passwordTxt.setBounds(139, 170, 380, 47);
+		passwordTxt.setBounds(139, 130, 380, 47);
 		passwordTxt.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		label.add(passwordTxt);
 
 		// login
-		JButton login_btn = new JButton("Login");
-		login_btn.setBounds(139, 240, 380, 47);
-		login_btn.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		login_btn.setBackground(new Color(153, 204, 153));
-		login_btn.addActionListener(new ActionListener() {
+		JButton signUp_btn = new JButton("Sign Up");
+		signUp_btn.setBounds(139, 200, 380, 47);
+		signUp_btn.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		signUp_btn.setBackground(new Color(153, 204, 153));
+		signUp_btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (userNameTxt.getText().equals("Admin") && passwordTxt.getText().equals("Admin")) {
-					QuestionManager qm = new QuestionManager();
-					qm.setVisible(true);
+				if (sysdata.getInstance().AddPlayer(userNameTxt.getText(), passwordTxt.getText())) {
+					JOptionPane.showMessageDialog(rootPane, "You Have Been Added Successfully", "Success",
+							JOptionPane.INFORMATION_MESSAGE);
 					setVisible(false);
+					Login mp = new Login();
+					mp.setVisible(true);
 				} else {
-					JOptionPane.showMessageDialog(rootPane, "wrong password", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(rootPane, "User Already Exists", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
-		label.add(login_btn);
-		// cancel btn
+		label.add(signUp_btn);
+
+		// cancel
 		JButton cancel_btn = new JButton("Cancel");
-		cancel_btn.setBounds(139, 310, 380, 47);
+		cancel_btn.setBounds(139, 260, 380, 47);
 		cancel_btn.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		cancel_btn.setBackground(new Color(153, 204, 153));
 		cancel_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +82,7 @@ public class LoginAdmin extends JFrame {
 
 	private void cancelActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
 		this.setVisible(false);
-		MainPage mp = new MainPage(true);
+		Login mp = new Login();
 		mp.setVisible(true);
 	}
 

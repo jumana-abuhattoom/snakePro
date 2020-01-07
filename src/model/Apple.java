@@ -1,8 +1,11 @@
 package model;
 
+import java.io.Serializable;
+
 import utils.Constants;
 
-public class Apple extends Fruit{
+public class Apple extends Fruit {
+	
 	
 	public static final int SIZE = 20;
 	protected int X, Y;

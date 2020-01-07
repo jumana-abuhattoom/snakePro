@@ -4,9 +4,8 @@ import java.net.URISyntaxException;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+public class Sound  {
 
-public class Sound {
-	
 	private Media sound;
 	private MediaPlayer audio;
 

@@ -1,8 +1,9 @@
 package model;
 
-import javafx.scene.paint.Color;
+import java.io.Serializable;
 
-public class Obstacle{
+public class Obstacle  {
+
 	public static final int SIZE = 20;
 	private int X, Y;
 	

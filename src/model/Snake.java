@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import view.MainView;
 
-public class Snake {
+public class Snake  {
 	
+
 	/**
 	 * Snake's starting size
 	 */

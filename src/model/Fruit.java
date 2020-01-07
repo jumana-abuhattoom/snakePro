@@ -1,6 +1,8 @@
 package model;
 
-public  abstract class Fruit {
+
+public  abstract class Fruit  {
+
 	public int appearAfterSec;
 	public int addedPoints;
 	public int addedLenght;
@@ -26,10 +28,5 @@ public  abstract class Fruit {
 	public int getAddedLenght() {
 		return addedLenght;
 	}
-	
-	
-	
-	
-	
-	
+		
 }

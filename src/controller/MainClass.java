@@ -2,7 +2,7 @@ package controller;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import view.MainPage2;
+import view.Login;
 
 /**
  * @author Mateusz Krawczyk The Main class
@@ -21,9 +21,9 @@ public class MainClass extends Application {
 		 primaryStage.setResizable(false);
 		 // Show the stage and actual scenes
 		 primaryStage.show();
-			MainPage2 mp = new MainPage2(true);
-		mp.show(true);
 
+			Login login = new Login();
+			login.show(true);
 	}
 
 	public static void main(String args[]) {

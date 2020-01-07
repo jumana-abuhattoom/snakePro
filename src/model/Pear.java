@@ -1,10 +1,12 @@
 package model;
 
-import javafx.scene.paint.Color;
+import java.io.Serializable;
+
 import utils.Constants;
 
-public class Pear extends Fruit{
+public class Pear extends Fruit  {
 	
+
 	public static final int SIZE = 20;
 	protected int X, Y;
 
